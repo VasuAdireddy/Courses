@@ -1,0 +1,38 @@
+***** Week 1
+--In traditional programming we give the rules and data, so we get the answers
+--But in machine learning we give the answers and data as input, machine will figureout the rules
+--Machine learning algorithm determins each different dataset into specific binary patterns for recognition
+--Neural Network is advanced implementation of machine learning, we call it as deep learning
+--Keras is an API in TensorFlow used for Machine Learning
+--A neural network is a set of functions which can learn patterns
+--The simplest possible neural network is the one that has one neuron in it
+
+//code
+model = keras.Sequential([keras.layers.Dense(units=1,input_shape=[1])])
+model.compile(optimizer='sgd', loss='mean_squared_error')
+xs=np.array([-1.0,0.0,1.0,2.0,3.0,4.0], dtype=float)
+ys=np.array([-3.0,-1.0,100,3.0,5.0,7.0], dtype=float)
+model.fit(xs,ys,epochs=500)
+
+print(model.predict([10.0])) //it will predict the ys value for 10.0
+
+--In keras, we use the word/keyword dense to define a layer of connected neurons.
+--There are two function roles, loaa functions and optimizers.
+--Since our machine dont know the answers, it will randomly do a guess first and then loss function determines,
+  how bad the present guess is and give to the optimizer function to optimize and figure out the next guess.
+--Optimizer uses data from the loss function to figure our how good or bad the guess is done
+--As the guess become better and better, and as the accuracy approaches 100% the term convergence is used.
+--In this case the loss is "mean squared error" and the optimizer is SGD which stands for
+  stochastic gradient descent
+--epochs=500 means training loop will go 500 times
+--here training loop means guessing, getting loss function, optimizing and again guessing
+--now according to the predict it should give 19 as answer, but our model will give answer closer to 19 not exactly 19
+--Reasons for that is we trained in only less data, ie only 6 points of x and y and other reason
+--is neural network will try to give realistic value and they try ro anser for everything, so they deal in probability
+
+
+*******Week 2
+
+-- Fashion MNIST is the dataset used for computer vision to train clothing.
+-- This set has 70000 images spread into 10 different items of clothing.
+-- each image is a 28x28 gray scale image

@@ -1,0 +1,657 @@
+select *from customer_table
+alter table customer_table add orders integer
+alter table customer_table drop orders
+alter table customer_table alter column age type integer
+alter table customer_table rename column email to cust_email_id
+alter table customer_table alter column age set not null
+insert into customer_table (first_name,last_name,cust_email_id) values ('aa','bbc','aabbc@sfsd.com')
+alter table customer_table alter column age drop not null
+alter table customer_table add constraint cust_id check(cust_id>0)
+insert into customer_table (cust_id,first_name,last_name,age,cust_email_id) values (-1,'aa','bbc',18,'aabbc@sfsd.com')
+alter table customer_table add primary key(cust_id)
+
+________________________________________________________________
+
+to copy CSV files into database
+copy customer from 'C:\Program Files\PostgreSQL....(reg csv file location)' CSV header
+
+________________________________________________________________
+
+select distinct city from customer order by city
+select distinct city from customer order by city ASC
+select *from customer where state = 'California' order by customer_name desc
+select *from customer order by city asc, customer_name desc
+select *from customer order by 2 /*here it means order by 2nd column*\
+
+select distinct *from customer order by age desc limit 10
+
+select customer_name as "cust name", age as customer_age from customer 
+________________________________________________________________
+
+---AGGREGATE FUNCTIONS::
+
+select count(age) from customer where age = 30
+select count(*) from customer --total no of rows
+select count(order_line) as "number of products orderd", count(distinct order_id) as "NUmber of orders" from sales where customer_id = 'CG-12520'
+
+select sum(profit) as "Total_profit" from sales
+select sum(quantity) as "Total Quantity" from sales where product_id = 'FUR-TA-10000577'
+
+select avg(age) as "average customer age" from customer
+select avg(sales*0.1) as "Average commision value" from sales
+
+select min(profit) as "Min Profit", max(profit) as "Max Profit" from sales
+
+____________________________________________________________________
+select * from customer
+select region,count(customer_id) as Customer_count from customer group by region
+select product_id, sum(quantity) as quan_sold from sales group by product_id order by quan_sold DESC
+select customer_id, min(sales) as min_sale_val, max(sales) as max_sale_val, avg(sales) as avg_sales, sum(sales) as sum_sales from sales group by customer_id order by sum_sales desc limit 10
+select region,state,count(customer_id) as Customer_count from customer group by region,state
+
+select region, count(customer_id) as cust_count from customer group by region having count(customer_id)>200
+/*
+where is used to specify condition on normal columns
+having is used to specify condition on aggregate functions of columns like (count, sum, avg,..etc)
+*/
+
+_____________________________________________________________________
+
+select * ,
+case when age<30 then 'Young'
+when age>60 then 'Senior Citizen'
+else 'Middle Aged'
+end as Age_category 
+from customer
+
+_________________________________________________________________________
+
+select 
+a.order_line,a.product_id,a.customer_id,a.sales,
+b.customer_name,b.age
+from sales_2015 as a inner join customer_20_60 as b on a.customer_id = b.customer_id order by customer_id
+
+select 
+a.order_line,a.product_id,a.customer_id,a.sales,
+b.customer_name,b.age
+from sales_2015 as a left outer join customer_20_60 as b on a.customer_id = b.customer_id order by customer_id
+
+//we can use left join instead of left outer join , lly to right join. both means same
+
+select 
+a.order_line, a.product_id, a.customer_id, a.sales,
+b.customer_name, b.age
+from sales_2015 as a right join customer_20_60 as b on a.customer_id = b.customer_id order by customer_id
+
+select 
+a.order_line, a.product_id, a.customer_id, a.sales,
+b.customer_name, b.age, b.customer_id
+from sales_2015 as a full join customer_20_60 as b on a.customer_id = b.customer_id order by a.customer_id, b.customer_id
+
+
+//cross join is the cartesian product between two sets of data
+it maps one row in one table to all possible rows in other table
+syntax:
+select a.ct1, b.ct2 
+from table1 as a, table2 as b
+order by a.ct1,b.ct2
+
+_____________________________________________________________________________
+
+//intersect will give common rown from two or more select queries
+
+select customer_id from sales_2015
+intersect
+select customer_id from customer_20_60
+
+//intersect all will give common rows , along with duplicates in both select queries
+select customer_id from sales_2015
+intersect all
+select customer_id from customer_20_60
+
+// except will remove common rows and give remaining rows in first select queries
+
+select customer_id from sales_2015
+except
+select customer_id from customer_20_60
+order by customer_id
+
+//union will show the combined output of all the select queries, if duplicates present then they are removed
+
+select customer_id from sales_2015
+union
+select customer_id from customer_20_60
+order by customer_id
+
+NOTE: in all the above columns(canditate_id,...) should be same in all the queries
+
+____________________________________________________________________________
+
+SUb Queries
+
+select *from sales where customer_id in 
+(select customer_id from customer where age>60)
+
+//subqueries should have only one column in sub select part
+
+select a.product_id,a.product_name,a.category,b.quantity
+from product as a
+left join (select product_id,sum(quantity) as quantity from sales group by product_id) as b
+on a.product_id = b.product_id
+order by b.quantity desc
+
+select customer_id, order_line, (select customer_name from customer where customer.customer_id = sales.customer_id)
+from sales order by customer_id
+____________________________________________________________________________
+
+Views
+
+create view logistics as
+select a.order_line, a.order_id, b.customer_name, b.city, b.state, b.country
+from sales as a
+left join customer as b
+on a.customer_id = b.customer_id
+order by a.order_line
+
+select * from logistics
+
+//if we update a view , corresponding data in the table will also get updated
+
+____________________________________________________________________________
+
+Strings:::
+
+-----length
+select customer_name, length(customer_name) as chars_in_name from customer where age>30
+select customer_name, length(customer_name) as chars_in_name from customer where length(customer_name)>5
+
+-----upper/lower
+select upper('VaASU')
+select lower('vasu')
+
+-----replace
+select customer_name, country, replace(country,'United States','US') as country_new from customer
+Note: strings inside replace are case sensitive
+this above command will only allows to see, but it wont actually replace in the table, for replacing in table we need to use update
+
+-----trim
+select trim(leading ' ' from '    Vasu    ')   //removes left side spaces
+select trim(trailing ' ' from '    Vasu    ')	//removes right side spaces
+select trim(both ' ' from '    Vasu    ')		//removes spaces on both sides
+select trim(' ' from '    Vasu    ')		//removes spaces on both sides
+
+select rtrim('    vasu     ',' ')		//removes left side spaces
+select ltrim('    vasu     ',' ')		//removes right side spaces
+
+-----concatinate
+select customer_name, city || ' , ' || state || ' , ' || country as address from customer
+
+-----substring
+select substring('jackson' from 2 for 3) // from position 2 in 'jackson' to a length of 3 , ie 'ack'
+select substring('jackson' for 3)    // from 1st position to lenght of 3
+
+select customer_id, customer_name, substring(customer_id for 2) as cust_group
+from customer
+where substring(customer_id for 2) = 'AB'
+
+
+select customer_id, customer_name, substring(customer_id from 4 for 5) as customer_num
+from customer
+where substring(customer_id for 2) = 'AB'
+
+-----aggregate
+# when same order has different products, we will concatinate all such products in one column
+select order_id, string_agg(product_id,', ') from sales group by order_id order by order_id
+
+________________________________________________________________________________
+
+***Math Functions
+
+-----ceil
+select ceil(4.5)			#output will be integer higher that the decimal value ie 5
+
+-----floor
+select floor(4.5)			#output will be integer lower that the decimal value ie 4
+
+select order_line, sales, ceil(sales), floor(sales) from sales
+
+-----random
+# below will give decimal values between 10(inclusive) and 20(exclusive)
+select random()*(20-10)+10
+# below will give integer values between 10(inclusive) and 20(exclusive)
+select floor(random()*(20-10)+10)
+# in below code random() will give decimal between 0(inclusive) and 1(exclusive)
+select random(),random()*40+10,floor(random()*(40-10)+10)
+
+-----setseed
+select setseed(0.5)
+select random() --0.98516
+select random() --0.82530
+select setseed(0.5)
+select random() --0.98516
+select random() --0.82530
+
+# setseed will help us to get same set of random values again and again, first we need to set seed then generate random numbers
+# again set seed and if we generate random numbers, we get same random numbers as before
+
+-----round
+#rounds to the nearest integer
+select round(10.2) --10
+select round(10.7) --11
+select order_line, sales, round(sales) from sales order by sales desc
+
+-----power
+#gives m^n
+select power(2,3) --8(2^3)
+
+______________________________________________________________________________
+
+*****current date and time functions
+
+select current_date, current_time, current_time(1), current_time(3), current_timestamp
+
+---current_date -> will give current date(YYYY-MM-DD)
+---current time -> will give current time(HH-MM-SS)
+---current_timestamp -> will give date+time
+---current_time(1) -> will give time with only one decimal after seconds
+
+-----age
+
+select age('2022-10-12','2001-10-12')
+
+select order_line, ship_date, order_date, age(ship_date,order_date) as time_taken
+from sales order by time_taken desc
+
+-----extract
+this function extracts specific parts from the date
+select current_time,extract(day from current_date) --15
+select current_timestamp,extract(hour from current_timestamp) --6
+
+select order_date,ship_date, (extract(epoch from ship_date)-extract(epoch from order_date)) as seconds_taken from sales 
+--epoch will give seconds taken at that date, we can also get seconds between 2 different days like above code
+
+_________________________________________________________________________________
+*****pattern matching
+-- wild cards of like statememts are different from wild cards of regular expression or regex
+--like statement perforn pattern matchin on whole strin,g regular expression peforms on part of string
+
+-----like
+select *from customer_table where first_name like 'Jo%'   --0 or more characters after Jo will be given
+select *from customer_table where first_name like 'Joh_'  -- only 1 character after Joh will be given
+
+-----regular expressions
+^ to denote start of string and & for end of string for matching
+more reg-ex are on pdf "Lecture_Pattern_Matching"
+we have keep back slash before any symbols, if smbols are included in pattern matching
+~* is used for searching with case insensitive, means all cases are given
+
+select * from customer
+where customer_name ~* '^a+[a-z\s]+$'
+--above code will give customer name starts with a and continuing many a's(since we add +) followed by any characters [a-b/s]+ they can repat because of + and can also include spsaces beacuse of \s
+
+select * from customer
+where customer_name ~* '^(a|b|c|d)+[a-z\s]+$'
+
+select * from customer
+where customer_name ~* '^(a|b|c)[a-z]{3}\s[a-z]{4}$'
+--output will be "Adam Hart", "Bart Folk"
+--[a-z]{3} means any 3 chars between a-z 
+
+select *from users
+where name ~* '[a-z0-9\.\-\_]+@[a-z0-9\-]+\.[a-z]{2,5}'
+--above code is for searching valid email id's
+--\.\-\_ means it can contain .,_,- in the name
+--[a-z]{2,5} means we can have any 2/3/4/5 chars between [a-z]
+
+___________________________________________________________________________
+
+*****window functions
+for selecting specif rows with same value in one column and do operations
+
+select cust,store,orders row_number() OVER (
+PARTITION BY store
+order by orders desc) as row
+from store_table
+--above code will do partition/group our data by store(like store A,B/C) and order them by max orders in that specific store
+and add row numbers from 1 to .. acc to max orders to the rows
+
+select *from customer limit 10
+select * from sales limit 10
+
+select a.*,b.order_num, b.sales_tot, b.quant_total, b.profit_tot
+from customer as a
+left join (select customer_id, count(distinct order_id) as order_num, sum(sales) as sales_tot,sum(quantity) as quant_total, sum(profit) as profit_tot
+from sales group by customer_id) as b
+on a.customer_id=b.customer_id
+
+--below syntax is to create a table for doing window_function
+create table customer_order as (select a.*,b.order_num, b.sales_tot, b.quant_total, b.profit_tot
+from customer as a
+left join (select customer_id, count(distinct order_id) as order_num, sum(sales) as sales_tot,sum(quantity) as quant_total, sum(profit) as profit_tot
+from sales group by customer_id) as b
+on a.customer_id=b.customer_id)
+
+select * from customer_order
+
+--now we want to give row numbers for each customer of similar state and on bases of orders
+--row_number()
+select customer_id, customer_name, state, order_num, row_number() over
+(partition by state order by order_num desc) as row_n from customer_order
+
+--to select the top 3 customers from each state
+select * from (select customer_id, customer_name, state, order_num, row_number() over
+(partition by state order by order_num desc) as row_n from customer_order) as a where a.row_n<=3
+
+--rank()
+is is also same as row_number(), it gives ranks based on our req column , but
+if two or more rows have same values then they are assigned same rank and for the next row, it will skip the ranks in between where all rows are same and assign the next rank
+
+--dense_rank()
+it is same as rank , but here if two rows have same values, it will assign same rank as rank(), but
+for the next row it will assign next rank without skipping
+
+
+select customer_id, customer_name, state, order_num,
+row_number() over (partition by state order by order_num desc) as row_n,
+rank() over (partition by state order by order_num desc) as rank_n,
+dense_rank() over (partition by state order by order_num desc) as dense_rank_n
+from customer_order
+
+o/p:
+
+"customer_id"	"customer_name"	"state"	"order_num"	"row_n"	"rank_n"	"dense_rank_n"
+"DC-12850"	"Dan Campbell"	"Alabama"			9	   1		   1			1
+"AM-10705"	"Anne McFarland"	"Alabama"			8	   2		   2			2
+"RL-19615"	"Rob Lucas"	"Alabama"				8	   3		   2			2
+"SC-20770"	"Stewart Carmichael"	"Alabama"		7	   4		   4			3
+"CA-11965"	"Carol Adams"	"Alabama"			6	   5		   5			4
+"EH-14185"	"Evan Henry"	"Alabama"			6	   6	   	   5			4
+"MC-17425"	"Mark Cousins"	"Alabama"	5	7	7	5
+"RH-19600"	"Rob Haberlin"	"Alabama"	3	8	8	6
+"FW-14395"	"Fred Wasserman"	"Alabama"	3	9	8	6
+"AB-10105"	"Adrian Barton"	"Arizona"	10	1	1	1
+"AG-10900"	"Arthur Gainer"	"Arizona"	10	2	1	1
+"GH-14410"	"Gary Hansen"	"Arizona"	9	3	3	2
+"AA-10375"	"Allen Armold"	"Arizona"	9	4	3	2
+"BC-11125"	"Becky Castell"	"Arizona"	9	5	3	2
+"JA-15970"	"Joseph Airdo"	"Arizona"	8	6	6	3
+"AH-10120"	"Adrian Hane"	"Arizona"	7	7	7	4
+"RW-19540"	"Rick Wilson"	"Arizona"	7	8	7	4
+"TS-21610"	"Troy Staebel"	"Arizona"	7	9	7	4
+"TW-21025"	"Tamara Willingham"	"Arizona"	7	10	7	4
+"TN-21040"	"Tanja Norvell"	"Arizona"	7	11	7	4
+
+--ntile()
+divide rows within a partition as equally possible into n groups, and assign each row its group number
+--below we kept ntile(5) because we want to group 20% data in each state into 1 group (100/20 = 5)
+select customer_id, customer_name, state, order_num,
+ntile(5) over (partition by state order by order_num desc) as tile_num 
+from customer_order
+
+--below is to get top 20% customers in each state
+select *from (select customer_id, customer_name, state, order_num,
+ntile(5) over (partition by state order by order_num desc) as tile_num 
+from customer_order) as a where a.tile_num = 1;
+
+--below is to get bottom 20% customers in each state
+select *from (select customer_id, customer_name, state, order_num,
+ntile(5) over (partition by state order by order_num desc) as tile_num 
+from customer_order) as a where a.tile_num = 5;
+
+
+--avg()
+average value for rows within the window frame
+
+select customer_id, customer_name,state, sales_tot as revenue,
+avg(sales_tot) over (partition by state) as average_revenue
+from customer_order
+
+--customers revenue less than average revenue
+select * from (select customer_id, customer_name,state, sales_tot as revenue,
+avg(sales_tot) over (partition by state) as average_revenue
+from customer_order) as a where revenue<a.average_revenue
+
+--count()
+for counting total number of customers in each state
+select customer_id, customer_name,state,
+count(customer_id) over (partition by state) as count_cust_id
+from customer_order
+
+--lag()
+lag function gives value of previous column
+
+select customer_id, order_date, order_id, sales,
+lag(sales,1) over (partition by customer_id order by order_date) as prev_sales,
+lag(order_id,1) over (partition by customer_id order by order_date) as prev_prder_id
+from order_rollup_state
+
+//in the above 1 determines the lag, like present row has previous row value
+//if we keep 2 then present row will have value of previous's previous row
+
+
+--lead()
+lead fucntion gives value of next column
+
+select customer_id, order_date, order_id, sales,
+lead(sales,1) over (partition by customer_id order by order_date) as prev_sales,
+lead(order_id,1) over (partition by customer_id order by order_date) as prev_prder_id
+from order_rollup_state
+
+//in the above 1 determines the lag, like present row has next row value
+//if we keep 2 then present row will have value of next's next row
+______________________________________________________________________________________
+
+*****coalesce function
+it returns the first non null value in the list of vlaues
+
+
+select *, coalesce(first_name,middle_name,last_name) as name_corr from emp_name
+_____________________________________________________________________________________
+
+*****conversion functions
+--to_char
+select sales, 'Total sales value for this order is' || to_char(sales,'9999.99') as message from sales
+above will comvert sales values into chars in '9999.99' format means only 2 values after '.'
+
+select sales, 'Total sales value for this order is' || to_char(sales,'$9,999.99') as message from sales
+--in above 'L' will give '$' symbol before and ',' will include ',' like ($1,2500.05)
+
+select order_date, to_char(order_date,'DDMMYY') from sales
+--above will change the any date format from like 2016-12-22 into 221216
+
+select order_date, to_char(order_date,'MONTH DAY YY') from sales
+--above will change the any date format from like 2016-12-22 into Decmeber Sunday 16
+--giving full format in capitals will give the name of that particular thing
+
+
+
+--to_date
+
+select to_date('2019/01/22','YYYY/MM//DD')
+--o/p:: 2019-01-22
+--above command will convert that char string into date format
+
+
+select to_date('150614','DDMMYY')
+--o/p:: 2014-06-15
+
+
+--to_number
+
+select to_number ('125.05','9999.99')
+--o/p:: 125.05
+
+select to_number ('$1,125.05','L9,999.99')
+--o/p:: 1125.05
+
+_______________________________________________________________________________
+
+***** create user
+//creating users and controlling access
+
+create user Jack with password 'Gibbs'
+
+--grant
+--used to grant permissions to users
+grant select,insert,update, delete on products to Jack
+grant select, delete on products to Jack
+grant all on products to Jack
+
+--revoke
+--used to take/remove permissions to user
+revoke select,insert,update, delete on products from Jack
+revoke select, delete on products from Jack
+revoke all on products from Jack
+
+--drop
+--used to delete user
+drop user Jack
+
+Note: we cannot drop/delete a user, if he has any rights on database,
+	for that we need to first revoke all from the user, then we should drop
+
+--rename
+--used to rename used name
+alter user Jack rename to Jones
+
+Note:
+--use below command to get information of all the users
+select usename from pg_user
+select * from pg_user // for geting all data
+
+--use below command to know current active users
+select distinct usename from pg_stat_activity
+select distinct * from pg_stat_activity // for getting all data times and all
+
+_______________________________________________________________________________
+
+*****Table space
+--only super user has privilege to create a table space
+--table space is the location in our hard drive where all the tables/data is being stored
+
+create tablespace location "D:\Courses\SQL MasterClass_SQL for Data Analytics"
+--above will create a tablespace in the given location
+create table customer_test (i int) tablespace Newspace
+--above will create atable in given tablespace
+select *from pg_tablespace
+--above will show all the table spaces
+
+______________________________________________________________________________
+
+*****ACID
+
+--Atomicity: all or none proposition
+	eg: if A is transfering Amount to B, then amount deducted from A's account and added in B's account (this is all)
+	    it cannot be like deducted from A and not added to B or added to b but not deducted from A
+
+--Consiatency: trnsaction can bring the database from one valid state to another
+	eg: if A transacted amount to B. Sum of amounts in both (A+B) will always be same before and after transaction
+
+--Isolation: keeps transactions seperat3ed from each other until tey are finished
+	eq: if transaction 1 is successfull then only it will run another transaction.
+	    it commits the first transaction to data base
+
+--Durability: badatbase keeps track of pending changes
+	eq: even if there are power failure or any failures, the database will be intact, it will save the changes, data is not sidturbed
+
+_____________________________________________________________________________
+
+*****TRUNCATE
+similar to delete, only delete the rows of table not the table
+
+truncate table customer
+
+--cascade -- all tables having foreigh key reference to this table will also be deleted
+--restrict --if there is any foreign reference to this table then this table is not deleted
+
+_______________________________________________________________________________
+
+*****Explain
+
+explain select *from customer
+--gives the cost of query, rows chaged or efficiency of query like that, that is called query plan
+explain select  distinct *from customer
+
+_______________________________________________________________________________
+
+--soft delete
+data is not actually deleted, it is just marked as deleted
+we can rollback it anytime, because its not completey deleted, its stored in our storage
+lots of storage is used
+eq: using update/insert
+
+--vaccum
+with the help of vaccum statement we can completely delete the soft deleted data, which is there because of using update statement
+syntax: vaccum customer
+
+--hard delete
+it will delete the data, eg using truncate
+
+--truncate is more efficient than delete with no where clause
+--truncate statement is immpossible to rollback 
+
+______________________________________________________________________________
+
+--like statements are more efficient that regex statements
+______________________________________________________________________________
+
+--schema is a seperate copy od databse, to work on it
+  it will nor change the original database
+  it is used when different teams in the company are working on database,
+  we should use schema, so the database is left uneffected for other teams to use it
+
+create schema test
+
+create table test.customer as select *from customer
+--above line will add customer table in test schema with same name as customer, so we can work on it without effecting real database
+
+____________________________________________________________________________
+
+*****theory
+
+--SQL is invented by IBM
+--SQL : Structured Query language
+--SQL is used to store, manipulate and manage data
+
+--Database is an organised tool capable of keeping data/information that can be retieved efficiently
+--Database contains two things data and meta data
+  data is the information
+  metadata is the information about how data is structured in the database
+
+--DBMS is used to define,manage and process Databases
+  it allows cretion of DB and their data structures
+  it allows modification,retival,storage of data
+  it enables recovery of data in times of failure
+  it control access to users
+
+
+***types of SQL commands
+--DDL: Data Definition Language
+      used for creating or managing elements such as tables and schemas
+	eq: create,alter,drop
+	used by developers and designers
+
+--DML: Data Manipulation Language
+	used to make changes to data inside the tables
+	eq: insert,update,delete
+	used by operations people, DB managers in company
+
+--DQL: Data Query Language
+	used for retrieving the stored data
+	eq: select,order by,group by
+	used by bussines users and analysts
+
+--DCL: Data Control Language
+	used for controlling access to database
+	eq: grant,revoke
+	used by admins or owners to grant access to users
+
+--TCC: Transactional control commands
+	used to maintain data integrity
+	eq: commit,rollback
+	used by operations people or DB managers
+
+______________________________________________________________________________
+
+--PostgreSQl is an advanced object relational databasemanagement system
+--supported by all major cloud service providers, including Amazon, Google and Microsoft
