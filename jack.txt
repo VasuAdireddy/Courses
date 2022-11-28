@@ -1,1 +1,12 @@
-vdefhugiuYHJVHE
+new local repo connected to github:
+git clone <url_of_github+_repo>
+
+commit changes:
+git status # to view changes
+git add <filename> # stage those changes
+git commit -m "commit messge here"
+
+push changes:
+if new repo: authenticate by login to github
+or
+git push
