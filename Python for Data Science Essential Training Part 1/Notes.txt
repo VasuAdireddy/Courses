@@ -18,3 +18,9 @@ ____________________________________________________________________________
 -- Filling Missing Values
 -- Counting Missing values
 -- Filter out missing values
+
+-- removing duplicates is very important to get accurate analysis
+-- concatination and transformation
+	useful for getting data into order and structure for analysis
+	concatination is combining data from seperate sources
+	transformation is converting and reformating data into the necessary format
