@@ -1,0 +1,438 @@
+-- Machine learning use cases
+sales forecasting
+customer segment analysis
+insurance claim fund detetion
+hedge fund classification
+spam detection
+
+
+-- Applications of ML
+Adaptive websites, Economics, Medical diagnosis, stock market analysis, robot locomotion,NLP, self driving cars , etc.
+
+
+-- uses of different ML models
+Regression - identify relationships between variables
+Classification - Assign new data to groups
+Density estimation - find distribution of inputs in certain space
+Dimension reduction - simplify inputs by mapping them to lower dimensional space
+Clustering - group similar data points , without knowing the groups beforehand
+
+
+--ML is a combination of:
+Mathematical Optimazation
+Computational Statistics
+Pattern Recognition
+Computational learning theory in AI
+
+
+-- Types of ML algorithms by functions:
+Regression -- linear, logistic
+Clustering -- K-means clustering, Hierarichal methods, DBSCAN
+Dimension reduction -- Explanatory factor analysis, PCA
+Association rules -- association rules with APriori
+Deep Learning -- Perceptron
+Instance based -- K-nearest neighbout algorithm (KNN)
+Decesion trees -- CART
+Bayesian -- Naiive Bayes
+Ensemble -- Random Forest
+Regularization
+
+
+80% of dataset is for Training
+20% of dataset is for Test
+
+
+-- Types of ML methods:
+Supervised Learning -- make predictions based on labeled data
+Unsupervised Learning -- make predictions based on unlabeled data
+Semi-SUpervised Learning -- used both labeled and unlabeled data
+
+
+-- Popular ways to group ML algorithms:
+By learning - sup,unsup and semi-sup
+By functions - reg,clus,etc (mentioned above)
+By use cases
+_____________________________________________________________________________________
+
+-- Regression Models:
+
+* Linear regression : make predictions based on relationship between variables
+two types:
+Simple linear regression : one predictor and one predictant
+Multiple linear regression : multiple predictors but only one predictant
+
+Linear regression use cases:
+Sales forecasting, Supply cost forecasting, Resource consumption forecasting, telecom service lifecycle forecasting, etc
+
+Linear regression assumptions:
+All variables are continuous numeric
+Data is free of missing values and outliers
+There should be linear relation between predictors and predictants
+All predictors and independent of eachother
+
+* Logistic Regression:
+here we predict the value of numerical categorical variable based on ite relation with predictor variable
+
+Logistic regression Use cases:
+Customer Churn Prediction, Employee Attrition Modeling, Hazardous Event Prediction, Purchase propensity vs Ad spend analysis
+
+Logistic Regression Assumption:
+Data is free of missing values
+the predictant should be binary(only 2 values) or ordinal(categorical variable, eg:race,sex)
+All predictors are independent of each other
+
+Modules used:
+OneHotEncoder, LabelEncoder
+_____________________________________________________________________________________
+
+-- Clustering Models:
+
+** K-Means Clustering
+is an unsupervised clustering algorithm used to predict subgroups/clusters from within a unlabel dataset. we can also know how many clusters are appropriate.
+
+K Means Clustering use cases:
+Market price and cost modeling, hedge fund classification, insurance claim fraud detection, customer segmentation
+
+prediction is based on the number of centroids(k values) present and nearest mean values,given an euclidean distance measurement between observations.
+
+when using K-means:
+Scale your variables
+Look at a scatterplot or data table to estimate the appropriate number of centroids to use for the K parameter values
+
+theory:
+K-Means Clustering is an Unsupervised Learning algorithm, which groups the unlabeled dataset into different clusters. Here K defines the number of pre-defined clusters that need to be created in the process, as if K=2, there will be two clusters, and for K=3, there will be three clusters, and so on.
+
+It is an iterative algorithm that divides the unlabeled dataset into k different clusters in such a way that each dataset belongs only one group that has similar properties.
+It allows us to cluster the data into different groups and a convenient way to discover the categories of groups in the unlabeled dataset on its own without the need for any training.
+
+It is a centroid-based algorithm, where each cluster is associated with a centroid. The main aim of this algorithm is to minimize the sum of distances between the data point and their corresponding clusters.
+
+
+** Hierarchical Clustering
+this predict the subgroups within data by finding the distance between each data point and its nearest neighbors, and then linking the most nearby neighbors.
+
+to guess the number of subgroups in a dataset, first look at a dendrogram visualization of the clustering results.
+
+Dendrogram : is a tree graph thats useful for visually displaying taxonomies, lineages and relatedness
+
+usecases:
+Hospital Resource Management, Bussiness Process Management, Customer Segementation, Social Network Analysis
+
+Hierarchical Clustering Parameters:
+Distance Metrics:: Euclidean, Manhattan, Cosine
+Linkage Parameter :: Wark, Complete, Average
+usually we do trail and error with all combinations and select the parameter with best results
+
+
+** DBSCAN
+unsupervised method that clusters core samples from dense areas of dataset and denotes non core samples from sparse areas of datasets.
+
+-used for outlier detection
+
+important model parameters:
+eps : is the maximum distance between 2 samples for them to be clustered in same neighbourhood.
+min_samples: minimum samples is the minimum number of samples in a neighbourhood for a data point to qualify as a core point.
+_____________________________________________________________________________________
+
+--- Dimensional reduction Models:
+
+*** Explanatory factor analysis
+
+it is a regression method used to find the hidden root causes/hidden factors for behaviour of data.
+
+Factor analysis assumptions:
+Features are metric
+Features are continuous and ordinal
+there is r>0.3 correlation between the features in dataset
+there should be >100 observations and >5 features per observation.
+Sample is homogenous.
+
+- output of factor analysis is called factor loading
+if loading is 1/-1 = factor has strong influence on the variable.
+if loading is 0 = factor has weak influence on the variable.
+if loading is >1 = means these are highly correlated factors.
+
+
+*** PCA (Principal Component Analysis)
+
+**SVD (Singular Value Decomposition) is a linear algebra method that decomposes a matrix into three resultant matrices in order to reduce information redundancy and noise.
+SVD is most commonly used for PCA.
+
+A (mxn) is our original dataset / original matrix.
+A=u*v*S
+we decompose A into 3 matices u(mxf), v(rxn), S(fxf)
+
+u = left orthogonal matrix :
+it holds important nonredundant information about observations in original dataset.
+v = right orthogonal matrix :
+it holds important nonredundant information on features in original dataset.
+S = diagnol matrix :
+it contains all information about the decomposition processes that are performed during the compression.
+
+PCA : is an unsupervised ML algorithm that discovers relationships between variables and reduces variables down to a set of uncorrelated synthetic representations called
+pricipal components.
+
+principal components are uncorrelated features that has dataset's important information with redundancy,noise and outliers stripped out/removed.
+
+PCA use cases:
+Fraud detection , speech detection, image detection.
+
+We use pricipal components as input variables for ML algorithms to generate predictions for better results.
+_____________________________________________________________________________________
+
+--- Association rules models with Apriori
+
+Association rule minning is a process that deploys pattern recognition to identify relationships between different, yet related feilds.
+
+use cases :
+seeks to find relationships between purchases made by customers.This is important for supermarkets and online stores for reccomondation of products and placement of products.
+it will answer questions like, How likely one will purchase bread too, if he purchased egg and milk?
+
+Advantages of Association Rules:
+Fast, works well on small data, doesnt require much feature engineering
+
+Feature Engineering: it refers to the process of engineering data into a predictive feature that fits the requirements of a machine learning model.
+Feature engineering is a machine learning technique that leverages data to create new variables that aren't in the training set.
+It can produce new features for both supervised and unsupervised learning, with the goal of simplifying and speeding up data transformations while also enhancing model accuracy.
+
+Three main ways to measure association:
+-Support : is the relative frequency of an item within a dataset.
+     it expresses how popular the item is as represented by the total proportion of items sold
+     eg: we want to calculate the support for bread purchases in a store
+         support for bread=(no of transactions containing bread) / (total no of transactions)
+     
+-Confidence : is the probability of seeing a consequent item within data, along with  other item.
+ in other words, how likely it is 1 item to be purchased given that if another item is purchased.
+ eg: confidence of bread to egg = (support for egg & bread)/(support for bread)
+     support for egg & bread = (no of transactions containing bread&egg)/(total no of transactions)
+     support for bread = (no of transactions containing bread)/(total no of transactions)
+     lets say total tran = 5000
+     eggs and bread tran = 150
+     bread tran = 500
+     confidence of bread to egg = (150/5000) / (500/5000)
+                       = 0.3 = 30%
+     so there is 30% likelihood that eggs will be bought if bread is purchased.
+     
+-Lift : is a metric that measures how much often both are purchased rather than independently.
+    here A = bread and C = eggs
+    lift score > 1 : A is highly associated with C. if A is purchased, it is likely that C will also be purchased.
+    lift score < 1 : if A is purchased, it is unlikely that C will be purchased.
+    lift score = 1: Indicates that there is no association between A and C.
+    lift (A->C) = confidence(A->C) / support(C)
+                = 0.3 / (350/5000)
+                = 4.28
+    we got, lift score > 1 ==> bread is highly asociated with eggs.
+    
+Apriori algorithm is the algo that we use to implement association rule minning over structured data.
+_____________________________________________________________________________________
+
+-- Neural Networks with percepton:
+
+Fundamental Concepts :
+An Input Layer
+Weights and bias
+A weighted sum
+An activation function
+Linear separability
+
+A perceptron is a neural network with just one layer.
+Its a linear classifier that outputs a binary response variable.
+Consequently the algorithm is called a "linear binary classifier".
+
+Data is said to have "linear separability" if it can be cleanly classified into one of two classes.
+Your data muct be linearly separable in order for a perceptron to operate properly.
+
+A perceptron is a single layer neural network.
+
+Activation Function:
+it is an mathematical function that is deployed on each unit in a neural network.
+All units in a shared layer deploy the same activation function.
+The purpose of activation functions is to enable neural networks to model complex, nonlinear phenomenon.
+
+Types of Activation models:
+Linear activation - used for single layer perceptron
+Logistic sigmoid
+Threshold function
+ReLU (rectified linear unit)
+Softmax
+_____________________________________________________________________________________
+
+-- K-Nearest Neighbour Classification:
+its is a supervised ML method.
+it memorizes observations from within a labeled test set to predict classification labels for new/unlabeled observations.
+it is based on how similar training observations are to new/incoming observations.
+the more similar the observation values, the more likely they will be classified with same label.
+
+use cases:
+stock price prediction, credit risk analysis, predictive trip planning, recommendation systems.
+
+Assumptions:
+dataset has little noise
+dataset is labeled
+dataset only contains relevant features
+dataset has distinguishable subgroups
+avoid using KNN on large datasets , it will take long time
+___________________________________________________________________________________
+
+-- Decision Trees with CART
+
+A decision tree is a decision-support tool that models decisions inorder to predict portable outcomes of those decisions.
+
+Decision trees are comprised of 3 types of nodes: 
+Root node : Represents the entire population or sample
+Decision node : is a sub node which further split into sub nodes
+Leaf node : this is the end node
+
+Decision tree algorithms are machine learning methods that are useful for making predictions from nonlinear data.
+
+These algorithms are perfect fit for:
+continuous input and/or output variables
+categorical input and/or output variables
+
+Two main types of decision trees:
+Categorical variable decision tree (or classification trees) : when you use a decision tree to predict for a categorical target variable.
+Continuous variable decision tree (or regression trees) : when you use a decision tree to predict for a continuous target variable.
+
+Main benefits of decision trees:
+these are non linear model, hence they can fit model with non linear data
+very easy to interpret.
+requires less data preperation.
+can be easily graphically represented.
+
+Assumptions:
+Root node should conpress the entire training set
+predictive features are either categorical, or if continuous they should be binned prior to model deployement.
+rows in the dataset should have a recursive distribution based on the values of attributes.
+
+working of decision trees:
+step 1: Deploy a recursive binary splitting to segment the predictor space into a number of simple, nonoverlapping regions.
+step 2: make a prediction for a given observation by using the mean or mode of the training observations in the region to which it belongs.
+step 3: use the set of splitting rules to summarize the tree.
+
+Recursive binary splitting:
+This is used for splitting the region into two at every stage.
+This splitting only stops when user defined criteria are met.
+
+we do this splitting by following criteria:
+In regression trees: we use SSE (sum square of errors) to calculate loss function, thus identifying the best split.
+In classification trees: we use Gini index to calculate the loss function to identify the best split.
+
+Characteristics of recursive binary splitting:
+Top-down
+Greedy : because for each stage, best split is made at that stage only, other then going ahead and looking for better split in future.
+
+Disadvantages :
+Very non robust
+sensitive to taining data : small change in data will largely affet the output
+globally optimal tree is not gauranteed
+
+Using regression tree is appropriate when:
+Target is continuous
+linear relationships between features and target
+output:
+output values from the terminal nodes represent the mean response, and values of new datapoints are predicted from that mean.
+
+Using classification tree is appropriate when:
+target is a binary, categorical variable.
+output:
+output values from the terminal nodes represent the mode response, and values of new datapoints are predicted from that mode.
+
+Tree pruning:
+is a process thats used to overcome model overfitting by removing subnodes of a decision tree, that is replacing a whole subtree by a leaf node.
+without pruning, if we grow a tree deeper, we will get good predictions but we may get bad performance because of over fitting.
+
+popular tree pruning methods : 
+Hold out test: fastest and simple pruning method
+Cost complexity pruning
+___________________________________________________________________________________
+
+-- Naive Bayes Classifiers
+
+is a ML method that can be used to predict the likelihood that an  event will occur given evidence thats present in your data.
+
+Conditional Probability:
+this is the same as this classifier, that is the probability of an event will occur given the evidence
+P(B/A) = P(A and B) / P(A) , here and=intersection(reverse U)
+
+There are 3 types of Naive Bayes models:
+multinomial : good for categorical and continous features and decribe discrete freq counts
+bernoulli : good for making predictions from binary features
+gaussian : good for making predictionds from normally distributed features
+
+Use cases of Naive Bayes:
+Spam detection, Customer Classification, Credit rist protection, health risk protection
+
+Assumptions: 
+Predictors are independent of each other.
+a priori assumption should hold  : is an assumption that is presumed to be true without any assessment of the facts or without further proof.
+All regression models maintain a priori assumption as well
+
+_____________________________________________________________________________________
+
+-- Ensemble Models
+these are machine learning methods that combine several base models to produce one optimal predictive model.
+They combine decisions for multiple models to improve to overall performance
+
+These methods can be comprised of:
+same algorithm more than once
+many types of alforithms that are agregated
+
+random forest is an ensemble of decision trees.
+
+Types of ensemble methods:
+max voting : these picks the result based on the majority votes from different models.
+This method is generally used for classification problems.
+averaging : here multiple models are run and their predictions are averaged.
+These are used for classification and regression problems.
+weighted averaging : this method uses multiple methods to make predictions by allocating weights to different models and averaging them.
+Bagging : takes results from multiple models and combines them to get final result.
+decision trees are used frequently with bagging. 
+main idea is to create subsets of original data and run different models on the subsets, finally aggregate their results
+Bagging splits the data in parallel and runs the models.
+Bagging has 4 main steps:
+step 1 : original data is divided into train and test sets.
+step 2 : multiple subsets are created from the training data.
+step 3 : each model is trained on the subset of the data.
+step 4 : final result is derived from multiple models using an aggrigation method.
+Boosting : This is complex version of bagging
+bagging works in parallel, but boosting has a sequential approach.
+steps:
+1 : Create a subset of data
+2 : run a model on the subset of data and get the predictions.
+3 : calculate errors on these predictions.
+4 : assign weights to the incorrect predictions
+5 : create another model with same data and the next subset of the data is created
+6 : repeat this cycle until strong learner is created.
+
+* Random Forest:
+this is an ensemble model which follows the bagging method.
+this uses decision trees to form ensembles.
+this is useful for both classification and regression problems.
+
+working:
+when predicting a new value for a feature, each tree will either use regression or classification to come up with a value that serves as a vote.
+then random forest algorithm takes an average of all the votes from all the trees in the ensemble.
+this average is the predicted value of the target feature for the variable in question.
+
+steps in random forest:
+1 : create a random subset from the original data
+2 : randomly select a set of features at each node in the decision tree.
+3 : decide the best split.
+4 : for each subset of data, create a seperate model ( a base learner)
+5 : compute the final prediction by averaging the predictions from all the individual models.
+
+advantages of RF:
+Easy to understand
+useful for data exploration
+reduced dara cleaning (scaling not required)
+Handle multiple data types
+Highly flexible and gives a good accuracy
+Works well on large datasets
+Overfitting is avoided due to averaging
+
+disadvantages of RF : 
+Overfitting
+Not for continuous variables
+Does not work well with sparse datasets
+computationally expensive
+no interpretibility

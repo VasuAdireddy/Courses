@@ -1,0 +1,402 @@
+Week 1 
+
+Probability : the likeliness of an event to occur
+probability of event = events / sample space
+Q) probability of occuring 6, when one dice is rolled : 1/6
+Q) probability of occuring both 6, when two dic are rolled : 1/6*1/6 = 1/36
+
+Complement of probability:
+P(event occuring) = 1 - P(event not occuring)
+
+Sum of probabilities:
+Probability of eccouring event A or event B is:
+P(A)+P(B)	(for disjoint events)
+for disjoint evnet P(AUB) = P(A)+P(B)
+for joint event P(AUB) = P(A)+P(B)-P(A∩B)
+
+Independence :
+This oocurs when occurance of one event does not effect the probability of occurance of another event.
+eg: when i toss a coin twice, the first toss doesnot effect the second toss
+eg for Non-Independent :  when i play chess the 10th move may effect the 11th move
+
+Product of probabilities:
+Probability of occuring event A and event B is: P(A∩B) = P(A)*P(B)
+This is also called product rule
+Above happens only when events A and B are independent.
+
+If we have independent events, the probability of occuring all those events at once is simple the product of all of them occuring.
+
+Conditional Probability:
+It is calculating the probability of an event happening given that another event has already happened.
+eg: we are tossing two coins, we know first coin landed heads, what is the probability of both coins landing on heads
+P(HH | 1st is H) = 1/2
+
+for dependent events: P(A∩B) = P(A)*P(B/A)
+-P(B/A) is probability of occuring B knowing that A occured
+P(A/B) = P(A∩B)/P(B)
+
+
+Bayes Theorem :
+It provides a way to update or revise our beliefs about the probability of an event based on new evidence or information. 
+Bayes' theorem is derived from conditional probability and allows us to calculate the probability of a hypothesis (or event) given some observed evidence.
+P(A/B) = (P(B/A)*P(A))/P(B)
+	= (P(A).P(B/A)) / P(A).P(B/A) + P(A').P(B/A')
+
+- bayes theorem is multiplying old probability with new probability (after getting evidence)
+eg: probability of spam with email containing word lottery
+P(S/L) = P(S intersection L) / P(L)
+if we elobarate the formula, we get
+P(S/L) = P(L/S).P(S) / P(L/S).P(S) + P(L/not S).P(not S)
+
+- prior P(A) is probability before event
+- E is the event
+- posterior is probability after event i.e P(A/E)
+
+- in above example we considered only one event, i.e lottery word, what if there is another word winning
+then P(S/L&W) = P(L&W/S).P(S) / P(L&W/S).P(S) + P(L&W/not S).P(not S)
+
+- we can have more events like hundred or nore, if there are more events like that, then we use naive assumption.
+- In simple terms, Naive Bayes assumes that the presence of a particular feature in a class is independent of the presence of other features. For example, when classifying an email as spam or not spam, Naive Bayes assumes that the presence of certain words in the email (features) is independent of the presence of other words.
+- since we assume the events are independent, the probability formula changes as
+P(S/L&W) = P(L/S).P(W/S).P(S) / P(L/S).P(W/S).P(S) + P(not S).P(L/not S).P(W/not S)
+- Machine Learning is full of probabilities.
+
+Probability Distributions :
+Random Variable: variables that take many values. eg: temperature
+lets say X= no of heads when we flip a coin, X can be 0 or 1. therefore x is a random variable.
+
+Binomial Distribution : The binomial distribution is a mathematical way of describing the likelihood or probability of getting a certain number of "successes" in a fixed number of "trials" or attempts, where each trial has only two possible outcomes.
+- binonial coeffecient of n choose k is = n! / (n-k)!*k!
+
+Bernoulli Distribution : The Bernoulli distribution is a mathematical concept used to model situations with only two possible outcomes, often referred to as success or failure.
+
+when our events are in a list, then we have a discrete distribution.
+When our events are in an interval, then we have a continuous distribution.
+lets say we attended a call, what is the probability of call lasting 1 minute out of 5 minutes, it is 0, because we have uncountable probabaility events between 1 and 5, like 1,1.01,1.2...
+for this, we can do like, what is the probability of call lasting between 0 and 1 minute, then it is 1/5
+so here we divivded the call from 0-5 into 5 parts 0-1,1-2,2-3,3-4,4-5
+if we divivde that  into 30 sec parts, then we will have 10 parts.
+if we distribute these parts probability in a x-y grph, we get a function, this is called probability density function.
+"The PDF is defined such that the area under the curve within a specific range represents the probability of observing values within that range."
+
+Cumulative Distribution FUnction : The CDF, on the other hand, gives the cumulative probability up to a certain value. It provides the probability that a random variable takes on a value less than or equal to a given value. The CDF represents the accumulation of probabilities as we move from the left to the right along the distribution.
+
+Uniform Distribution:
+It is simplest continuous distribution.
+The uniform distribution is a probability distribution that describes a situation where all values within a given range are equally likely to occur. It is also known as the rectangular distribution.
+
+Normal Distribution / Gaussian Distribution:
+The normal distribution, also known as the Gaussian distribution or bell curve, is a mathematical concept that describes a symmetrical probability distribution for a continuous random variable.
+mean = mue is the center of the bell curve
+sdv = sigma is the spread of the bell on either side of bell
+
+sampling from a distribution, sampling is used to make a copy of a distribution
+Sampling a distribution refers to the process of selecting a subset of observations or values from a population or probability distribution to analyze or draw conclusions about the larger population or distribution.
+
+__________________________________________________________________________________________
+
+Week - 2
+
+- mean, median, mode describes the center of the distribution
+- variance describes the spread of the distribution.
+- mode is the num with maximum freq in a distribution, if different numbers have same frequency which is the highest, then it is called multimodal distribution.
+- for a symmetrical distribution mean and median will be same.
+- mean of a distribution or expected value of a distribution is the point where we can balance the distribution.
+- expected value:
+lets say we flip a coin we get 1$ when it lands on heads and nothing for tails, then expected value will be
+E[X] = 0.5 *1 + 0.5*0 = 0.5$ 	,here 0.5 is probability of head, tail
+- if we have another event eith another expected values E[X2], we can say E[X+X2] = E[X]+E[X2]
+- expected value is also sum without weights
+- variance = E[(X-mu)^2] = E[X^2] - E[X]^2
+- if X is in meters, we get mean/ expected value in meters but as we can see we get variance in meters squared.
+- to solve this we can simple take root of variance and call it standard deviation.
+- std(X) = (Var(X))^1/2
+- Normal Distribution: 68-95-99.7 rule
+mu+sigma(1 std) = 68% of area under normal distribution curve, mu+2*sigma (2 std) is 95% area, mu+3*sigma (3 std) is 99.7% area
+- Var(cX) = c^2Vae(X)
+- Var(X/sigma) = (1/sigma^2)*Var(X)
+- Std(X/sigma) = (1/sigma)*Std(X)
+
+-positively skewed, means there are more values towards right very far, than towards left
+- negatively skewed, means there are more values towards left very far than towards right.
+- Skewness S= E[(X-mu / sigma)^3]
+- if S>0 , thenn it is positively skewed
+- if S=0, then it is not skewed
+- if S<0, then it is negatively skewed
+- if distributions are symmetric around midpoint, they have skewness of 0
+
+- kurtosis = E[X^4], fourth moment
+- K = E[(X-mu / sigma)^4]
+- In a distribution, if the tails on right and left are skinny, then it has small kurtosis, if they are thick that means large kurtosis
+
+- first moment = E[X], i.e expected value / mean
+- second moment = E[X^2], i.e Variance
+- third moment = E[X^3], i.e Skewness
+- fourth moment = E[X^4], i.e Kurtosis
+
+- Inter Quartile range = Q3-Q1
+- Q3 =element at 75% of data
+- Q1 =element at 25% of data
+- this is considered after sorting data only
+- lower wisker = Q1-1.5*IQR
+- upper wisker = Q3+1.5*IQR
+- upper and lower wiskers are present in BoxPlot.
+
+- violin plots, it contains the information of both Box plots and kernel density estimation.
+- QQ plots are used to visually inspect, if our data is gaussian or not?
+
+-The variance has the sample's dimension squared, whereas the standard deviation has the same dimension as the sample. This makes it easier to interpret.
+
+
+Joint Distributions:
+Probability of having both events true. for discrete vaiables and continuous variables.
+
+Marginal Distribution:
+The marginal distribution is obtained by summing or integrating over all other variables in the joint distribution. For discrete random variables, the marginal distribution is obtained by summing the joint probabilities over the values of the variable of interest, while for continuous random variables, it is obtained by integrating the joint probability density function over the range of the variable.
+P(X) = ∑Y P(X, Y) (for discrete variables)
+P(X) = ∫ P(X, y) dy (for continuous variables)
+
+Conditional Distribution:
+The conditional distribution refers to the probability distribution of one or more random variables given the knowledge or information about the values of other random variables. It allows us to analyze the distribution of a variable within a specific context or condition.
+In mathematical terms, the conditional distribution of a random variable X given another random variable Y is denoted as P(X | Y) and is defined as:
+P(X | Y) = P(X, Y) / P(Y)
+
+Covariance:
+The covariance of a dataset is a measure of how two variables in the dataset vary together. It quantifies the degree to which changes in one variable are associated with changes in another variable.
+Given a dataset with n observations of two variables X and Y, denoted as (x₁, y₁), (x₂, y₂), ..., (xₙ, yₙ), the covariance between X and Y, denoted as Cov(X, Y), is calculated as follows:
+Cov(X, Y) = Σ[(xᵢ - mu(x))(yᵢ - mu(y))] / (n )
+Covariance > 0, data is positively correlated, if one variable grows other also grows, graph looks like points inceasing from left to right
+Covariance < 0, data is negatively correlated, if one increases other decreases, graph looks like points decreasing from left to right
+Covariance = 0, no relation beteweeen the variables
+- covariance matrix = [[Var(X) Cov(X,Y)],[Cov(X,Y),Var(Y)]]
+- covariance coefficiemt = Cov(X,Y) / sdv(x)*sdv(y) = Cov(X,Y)/ (Var(x))^1/2.(Var(y))^1/2
+
+Multivariate gaussian Distribution: 
+this is normal distribution for multiple variables.
+for univariate, we work with scalar values and variances.
+for multivariate, we work with vectors and the covariance matrix
+
+Q) what is the expected value of rolling a fair six sided die?
+A) Expected value = (1 * 1/6) + (2 * 1/6) + (3 * 1/6) + (4 * 1/6) + (5 * 1/6) + (6 * 1/6)
+= (1 + 2 + 3 + 4 + 5 + 6) / 6
+= 21 / 6
+= 3.5
+
+Q) A fair six sided dice is rolled. what is the expected value of the square of the number rolled?
+A) Expected value = (1^2 * 1/6) + (2^2 * 1/6) + (3^2 * 1/6) + (4^2 * 1/6) + (5^2 * 1/6) + (6^2 * 1/6)
+= (1 + 4 + 9 + 16 + 25 + 36) / 6
+= 91 / 6
+= 15.1666...
+
+-correlation coeficient is a real number between -1 and 1.
+
+Q) Given a fair 4-sided dice, you throw it two times and record the sum. Fill out the probabilities of each sum .
+A) P(Side 1) = 1/4
+P(Side 2) = 1/4
+P(Side 3) = 1/4
+P(Side 4) = 1/4
+
+To find the probabilities of each sum, we can use the concept of convolutions. We convolve the probability distributions of the first throw with the probability distribution of the second throw to get the probability distribution of the sum.
+
+The possible sums when throwing the dice two times are 2, 3, 4, 5, 6, 7, and 8.
+
+Using the convolution method, we can calculate the probabilities for each sum:
+
+P(Sum = 2) = P(Side 1) * P(Side 1) = (1/4) * (1/4) = 1/16
+P(Sum = 3) = P(Side 1) * P(Side 2) + P(Side 2) * P(Side 1) = (1/4) * (1/4) + (1/4) * (1/4) = 1/8
+P(Sum = 4) = P(Side 1) * P(Side 3) + P(Side 2) * P(Side 2) + P(Side 3) * P(Side 1) = (1/4) * (1/4) + (1/4) * (1/4) + (1/4) * (1/4) = 3/16
+P(Sum = 5) = P(Side 1) * P(Side 4) + P(Side 2) * P(Side 3) + P(Side 3) * P(Side 2) + P(Side 4) * P(Side 1) = (1/4) * (1/4) + (1/4) * (1/4) + (1/4) * (1/4) + (1/4) * (1/4) = 4/16 = 1/4
+P(Sum = 6) = P(Side 2) * P(Side 4) + P(Side 3) * P(Side 3) + P(Side 4) * P(Side 2) = (1/4) * (1/4) + (1/4) * (1/4) + (1/4) * (1/4) = 3/16
+P(Sum = 7) = P(Side 3) * P(Side 4) + P(Side 4) * P(Side 3) = (1/4) * (1/4) + (1/4) * (1/4) = 2/16 = 1/8
+P(Sum = 8) = P(Side 4) * P(Side 4) = (1/4) * (1/4) = 1/16
+
+
+Q) You have a 6-sided dice that is loaded so that it lands twice as often on side 3 compared to the other sides:
+You record the sum of throwing it twice. 
+A)
+P(Side 1) = P(Side 2) = P(Side 4) = P(Side 5) = P(Side 6) = 1/7
+P(Side 3) = 2/7
+
+Now, let's calculate the cumulative probabilities for each sum:
+
+Sum	Probability
+2	P(1, 1) = (1/7) * (1/7) = 1/49
+3	P(1, 2) + P(2, 1) = (1/7) * (1/7) + (1/7) * (2/7) = 1/49 + 2/49 = 3/49
+4	P(1, 3) + P(2, 2) + P(3, 1) = (1/7) * (2/7) + (2/7) * (2/7) + (2/7) * (1/7) = 4/49 + 4/49 + 2/49 = 10/49
+5	P(1, 4) + P(2, 3) + P(3, 2) + P(4, 1) = (1/7) * (1/7) + (2/7) * (2/7) + (2/7) * (2/7) + (2/7) * (1/7) = 1/49 + 4/49 + 4/49 + 2/49 = 11/49
+6	P(1, 5) + P(2, 4) + P(3, 3) + P(4, 2) + P(5, 1) = (1/7) * (1/7) + (2/7) * (1/7) + (2/7) * (2/7) + (2/7) * (2/7) + (2/7) * (1/7) = 1/49 + 2/49 + 4/49 + 4/49 + 2/49 = 13/49
+7	P(1, 6) + P(2, 5) + P(3, 4) + P(4, 3) + P(5, 2) + P(6, 1) = (1/7) * (1/7) + (2/7) * (1/7) + (2/7) * (2/7) + (2/7) * (2/7) + (2/7) * (2/7) + (1/7) * (1/7) = 1/49 + 2/49 + 4/49 + 4/49 + 4/49 + 1/49 = 16/49
+8	P(2, 6) + P(3, 5) + P(4, 4) + P(5, 3) + P(6, 2) = (2/7) * (1/7) + (2/7) * (2/7) + (2/7) * (2/7) + (2/7) * (1/7) = 4/49 + 4/49 + 4/49 + 2/49 = 14/49
+9	P(3, 6) + P(4, 5) + P(5, 4) + P(6, 3) = (2/7) * (1/7) + (2/7) * (2/7) + (2/7) * (2/7) + (1/7) * (1/7) = 4/49 + 4/49 + 4/49 + 1/49 = 13/49
+10	P(4, 6) + P(5, 5) + P(6, 4) = (2/7) * (1/7) + (2/7) * (2/7) + (1/7) * (1/7) = 4/49 + 4/49 + 1/49 = 9/49
+11	P(5, 6) + P(6, 5) = (2/7) * (1/7) + (1/7) * (1/7) = 2/49 + 1/49 = 3/49
+12	P(6, 6) = (1/7) * (1/7) = 1/49
+
+__________________________________________________________________________________________
+
+Week - 3
+
+- if we want to calculate average height of a country, we cannot ask and know everyones height and divide by total numbers, because there can be millions of people.
+- so we take a sample of people, lets say a 100/ 1000, like that and calculate the average of them
+- we need to pick them randomle, we should not sort the set before picking sample set.
+- if we decided to pick another sample, we should pick randomly, irrespective of people in first set, we should consider them also while picking second set. or else the second set will become dependent on first set, which will give a wrong answer.
+- every dataset we work with in ML is a sample.
+- the bigger the sample size, the better estimation of population we will get.
+
+- population proportion :  p = no of items with given characteristics(x) / population(n)
+- lets say we are calculating proportion for a sample of population then it is called, sample proportion (p hat)
+
+- variance (sigma^2) = summation(x-mu)^2 / N = population mean ^2 / population size
+- we can also do variance estimation using a sample of data, but fot that we need to divide by n-1 in variance formula, instead of n, and also we need to calculate variance for all posible subsets/ samples sets and take the mean of them.
+- sample variance = summation(x-x bar)^2 / (n-1)
+
+Law of Large numbers:
+certain conditions:
+- sample is randomly drawn
+- sample size must be sufficiently large
+- Independent observations.
+
+-The Central Limit Theorem (CLT) is a fundamental concept in statistics and probability theory. It states that, under certain conditions(mentioned above), the average of a large number of independent and identically distributed (i.i.d.) random variables will have an approximately normal (Gaussian) distribution, regardless of the distribution of the individual variables.
+
+- according to CLT,
+mean of the sample means (mux bar) = population mean (mu)
+variance of the sample means (sigma x bar)^2 = sigma^2 / n , population variance
+
+- to check wether the distribution follows normality or gaussian we use the following plots or methods
+- Probability density function (PDF)
+- Kernel density estimation
+- QQ plots
+
+- for binomial distribution
+mean (mu) = np
+standard deviation (sigma) = [np(1-p)]^1/2 = [npq]^1/2
+
+- for samples from binomial distribution
+mean of sample (mu X bar) = mean (mu) = np
+std of sample (sigma x bar) = sigma/(sample_size)^1/2
+
+- for poisson distribution
+mean (mu) = mean
+std (sigma) = (mean)^1/2
+
+SUMMARY:
+
+Binomial Distribution:
+Mean (μ) = np
+Variance (σ^2) = np(1 - p)
+Standard Deviation (σ) = √(np(1 - p))
+
+Poisson Distribution:
+Mean (μ) = λ
+Variance (σ^2) = λ
+Standard Deviation (σ) = √λ
+
+Normal Distribution:
+Mean (μ) = μ
+Variance (σ^2) = σ^2
+Standard Deviation (σ) = σ
+
+Note: In the formulas, "n" represents the number of trials, "p" represents the probability of success in a single trial, "λ" represents the average rate or intensity parameter for the Poisson distribution, "μ" represents the mean or average, "σ^2" represents the variance, and "σ" represents the standard deviation.
+
+
+EXAMPLE:
+
+Binomial Distribution:
+Suppose we have a binomial distribution with 100 trials and a success probability of 0.3.
+Mean (μ) = n * p = 100 * 0.3 = 30
+Variance (σ^2) = n * p * (1 - p) = 100 * 0.3 * (1 - 0.3) = 21
+Standard Deviation (σ) = √(n * p * (1 - p)) = √(100 * 0.3 * (1 - 0.3)) ≈ 4.583
+
+Poisson Distribution:
+Let's consider a Poisson distribution with an average rate of 5 events occurring per time unit.
+Mean (μ) = λ = 5
+Variance (σ^2) = λ = 5
+Standard Deviation (σ) = √λ = √5 ≈ 2.236
+
+Normal Distribution:
+Suppose we have a dataset following a normal distribution with the following values: [10, 12, 15, 17, 20].
+Mean (μ) = (10 + 12 + 15 + 17 + 20) / 5 = 74 / 5 = 14.8
+Variance (σ^2) = [(10 - 14.8)^2 + (12 - 14.8)^2 + (15 - 14.8)^2 + (17 - 14.8)^2 + (20 - 14.8)^2] / 5
+= (18.04 + 7.84 + 0.16 + 6.76 + 21.16) / 5 = 53 / 5 = 10.6
+Standard Deviation (σ) = √(10.6) ≈ 3.258
+
+-The central limit theorem states that as the sample size increases, the sampling distribution of the mean approaches a normal distribution, regardless of the distribution of the population.
+
+
+Point Estimation :
+-Point estimation is a statistical method used to estimate an unknown parameter or characteristic of a population based on sample data. The goal of point estimation is to provide a single value, called the point estimate, that serves as a reasonable guess or approximation for the parameter of interest.
+- MLE or maximum likelihood estimation is widely used in ML to train models. This is a type of point estimation.
+- we will use this to pick a model that most likely produced the data. we do conditional probability here
+- the best distribution is the one where the mean of the distribution is the mean of the sample.
+
+__________________________________________________________________________________________
+
+Week - 4
+
+- confidence level = (1- alpha) * 100, (alpha = significance level)
+-Confidence level refers to the degree of certainty or reliability associated with a statistical inference or estimation. It is commonly used in hypothesis testing and interval estimation in statistics.
+- confidence level is in percentage.
+- we do estimation on whole population based on the sample we have table, confidence levels tells us how likely that our estimation is correct.
+- the larger the sample size, the smaller the confidence interval, because all our points are more likely towards the population mean, which makes our distribution more gaussian( long bell curve), then the confidence interval range decreases.
+
+- when a normal distribution is standardised, 68% of the population falls 1 standard deviation away from mean i.e (mu-sigma to mu+sigma), 95% falls in 2 standard deviation away from mean i.e (mu-2*sigma to mu+2*sigma) 
+These are called z-values.
+
+-steps to find confidence interval:
+find sample mean
+Define a desired confidence level (1-alpha)
+Get critical value (Z alpha/2), left out interval after filling 95% in normal distribution.
+find standard error (sigma / n^1/2 )
+find margin error (Z alpha/2) * standard error
+Finally add/subtract the margin of error to the sample mean, to get confidence interval
+i.e confidence interval = (x bar) +/- (Z alpha/2)*(sigma/ n^1/2)
+
+- we can find the n, i.e the minimum sample size for getting specific small margin error
+- by that we can reducr the error, and also take desired sample size
+- we can do this by finding n using the above formula by keeping desired margin error.
+
+- the confidence interval contains the true population parameter approximateky 95% of the time.
+
+- There will be cases where we dont know the standard deviation, then we need to use student t-distribution
+- in such cases we can use sample standard deviation in place of population standard deviation. then it is no longer a normal distribution, it is students t distribution.
+
+Hypothesis testing:
+null hypothesis(H0): it is the base assumption
+Aternative hypothesis(H1): this represents the clain that contradicts the null hypothesis.
+- after hypothesis testing one hypothesis is rejected and other is accepted.
+Type 1 error(false positive) : null hypothesis is rejected when it is correct
+eg: marking a good email as spam
+Type 2 error (false negative)  : null hypothesis is incorrectly accepted/
+eg: when a spam email is marked as good.
+- in a confusion matrix
+[[TN FP],[FN TP]], FP is type 1 error and FN is type 2 error.
+-Hypothesis is always based on population, it  is not based on sample populations.
+-The maximum probability of type 1 error you are willing to tolerate is significance level (alpha), ranges(0-1)
+- test statistic gives the information about the population parameter we want to stufy.
+eg: if we want to study mean of population, test statistic is sample mean.
+- right tailed test, is where alternative hypothesis extends to the right of null hypothesis
+eg: H0 : mu(mean) = 6.69 ; H1: mu(mean) > 6.69
+- left tailed test, is where alternative hypothesis extends to the left of null hypothesis
+eg: H0 : mu(mean) = 6.69 ; H1: mu(mean) < 6.69
+- two tailed test, is where alternative hypothesis is different than null hypothesis,
+eg: H0 : mu(mean) = 6.69 ; H1: mu(mean) != 6.69
+
+- if p-value is < alpha , reject H0 and accept H1 as true
+- if p value > alpha, dont reject H0
+- typically we consider alpha=0.05
+- the p-value is a measure that helps determine the strength of evidence against the null hypothesis
+
+steps of hypothesis testing:
+- state you hypothesis
+	setting null and alternative hypothesis
+- Design your test
+	Decide the test statistic to work with
+	Decide the significance level (alpha)
+- Compute the observed statistic
+- Reach a conclusion
+	if p-value<signicance, reject H0 and accept H1
+	if p-value>significance, accept H0
+
+
+A/B testing:
+/B testing, also known as split testing, is a statistical technique used in marketing and web development to compare two or more versions of a webpage, advertisement, or other marketing elements to determine which one performs better. It is a controlled experiment where the variations, referred to as A and B, are presented to different groups of users or visitors.

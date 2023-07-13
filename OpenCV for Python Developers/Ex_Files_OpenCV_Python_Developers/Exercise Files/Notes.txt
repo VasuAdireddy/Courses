@@ -1,0 +1,6 @@
+virtual environment is very usefull when we want to install specific version of software on for that specific project
+it ensures other versions of same software will not be effected.
+
+pip install opencv-contrib-python
+
+Basic Image Operations :

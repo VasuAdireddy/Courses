@@ -1,0 +1,657 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20222.22.0812.0353                               -->
+<workbook original-version='18.1' source-build='2022.2.1 (20222.22.0812.0353)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
+    <_.fcp.MarkAnimation.true...MarkAnimation />
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <SavingAnalyticObjects />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <_.fcp.AnimationOnByDefault.false...style>
+    <_.fcp.AnimationOnByDefault.false..._.fcp.MarkAnimation.true...style-rule element='animation'>
+      <_.fcp.AnimationOnByDefault.false...format attr='animation-on' value='ao-on' />
+    </_.fcp.AnimationOnByDefault.false..._.fcp.MarkAnimation.true...style-rule>
+  </_.fcp.AnimationOnByDefault.false...style>
+  <datasources>
+    <datasource caption='Sheet1 (ClusterData)' inline='true' name='federated.0rzcav01b1yibk1865d9s00e26iq' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='ClusterData' name='excel-direct.1hkgp5x0dwqh3r1cjita51nszars'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='D:/Courses/New folder/Courses/Tableau Essential Training/Ex_Files_Tableau_EssT/Exercise Files/Chapter08/ClusterData.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='excel-direct.1hkgp5x0dwqh3r1cjita51nszars' name='Sheet1' table='[Sheet1$]' type='table'>
+          <columns gridOrigin='A1:B41:no:A1:B41:0' header='yes' outcome='6'>
+            <column datatype='integer' name='Income' ordinal='0' />
+            <column datatype='integer' name='SalesTotal' ordinal='1' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='excel-direct.1hkgp5x0dwqh3r1cjita51nszars' name='Sheet1' table='[Sheet1$]' type='table'>
+          <columns gridOrigin='A1:B41:no:A1:B41:0' header='yes' outcome='6'>
+            <column datatype='integer' name='Income' ordinal='0' />
+            <column datatype='integer' name='SalesTotal' ordinal='1' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:B41:no:A1:B41:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Income</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Income]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>Income</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Sheet1_83E1466AFA8D4D74A2685A208FE04B9F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>SalesTotal</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[SalesTotal]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>SalesTotal</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Sheet1_83E1466AFA8D4D74A2685A208FE04B9F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='integer' name='[Income]' role='measure' type='quantitative' />
+      <column caption='Sales Total' datatype='integer' name='[SalesTotal]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='Sheet1' datatype='table' name='[__tableau_internal_object_id__].[Sheet1_83E1466AFA8D4D74A2685A208FE04B9F]' role='measure' type='quantitative' />
+      <column-instance column='[Income]' derivation='Sum' name='[sum:Income:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[SalesTotal]' derivation='Sum' name='[sum:SalesTotal:qk]' pivot='key' type='quantitative' />
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:AdhocCluster:1:ok]' type='palette'>
+            <map to='#499894'>
+              <bucket>29</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>1</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>21</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>5</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>25</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>4</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>12</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>33</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>30</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>20</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>26</bucket>
+            </map>
+            <map to='#9c755f'>
+              <bucket>9</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>16</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>39</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>18</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>22</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>7</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>37</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>27</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>10</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>34</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>13</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>35</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>15</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>38</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>17</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>40</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>3</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>31</bucket>
+            </map>
+            <map to='#edc948'>
+              <bucket>6</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>28</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>2</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>23</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>14</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>36</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>11</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>32</bucket>
+            </map>
+            <map to='#ff9da7'>
+              <bucket>8</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>19</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>24</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <analytic-model>
+        <name>
+          <field name='[AnalyticModel:{8d37b096-a503-4c9f-8eeb-8ddedf677172}]' />
+        </name>
+        <analytic-model-specifications class='cluster-specifications'>
+          <analysis-fields>
+            <field name='[federated.0rzcav01b1yibk1865d9s00e26iq].[sum:SalesTotal:qk]' />
+            <field name='[federated.0rzcav01b1yibk1865d9s00e26iq].[sum:Income:qk]' />
+          </analysis-fields>
+          <filter-fields />
+          <lod-fields />
+          <number-of-desired-clusters>3</number-of-desired-clusters>
+          <is-dissagregate>false</is-dissagregate>
+        </analytic-model-specifications>
+        <result-fields />
+      </analytic-model>
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='Sheet1' id='Sheet1_83E1466AFA8D4D74A2685A208FE04B9F'>
+            <properties context=''>
+              <relation connection='excel-direct.1hkgp5x0dwqh3r1cjita51nszars' name='Sheet1' table='[Sheet1$]' type='table'>
+                <columns gridOrigin='A1:B41:no:A1:B41:0' header='yes' outcome='6'>
+                  <column datatype='integer' name='Income' ordinal='0' />
+                  <column datatype='integer' name='SalesTotal' ordinal='1' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (ClusterData)' name='federated.0rzcav01b1yibk1865d9s00e26iq' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0rzcav01b1yibk1865d9s00e26iq'>
+            <column auto-hidden='true' caption='Clusters' datatype='integer' hidden='true' is-adhoc-cluster='true' name='[AdhocCluster:1]' parent-model='[AnalyticModel:{8d37b096-a503-4c9f-8eeb-8ddedf677172}]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='-1' value='Cluster Outliers' />
+                <alias key='0' value='Not Clustered' />
+                <alias key='1' value='Cluster 1' />
+                <alias key='2' value='Cluster 2' />
+                <alias key='3' value='Cluster 3' />
+                <alias key='4' value='Cluster 4' />
+                <alias key='5' value='Cluster 5' />
+                <alias key='6' value='Cluster 6' />
+                <alias key='7' value='Cluster 7' />
+                <alias key='8' value='Cluster 8' />
+                <alias key='9' value='Cluster 9' />
+                <alias key='10' value='Cluster 10' />
+                <alias key='11' value='Cluster 11' />
+                <alias key='12' value='Cluster 12' />
+                <alias key='13' value='Cluster 13' />
+                <alias key='14' value='Cluster 14' />
+                <alias key='15' value='Cluster 15' />
+                <alias key='16' value='Cluster 16' />
+                <alias key='17' value='Cluster 17' />
+                <alias key='18' value='Cluster 18' />
+                <alias key='19' value='Cluster 19' />
+                <alias key='20' value='Cluster 20' />
+                <alias key='21' value='Cluster 21' />
+                <alias key='22' value='Cluster 22' />
+                <alias key='23' value='Cluster 23' />
+                <alias key='24' value='Cluster 24' />
+                <alias key='25' value='Cluster 25' />
+                <alias key='26' value='Cluster 26' />
+                <alias key='27' value='Cluster 27' />
+                <alias key='28' value='Cluster 28' />
+                <alias key='29' value='Cluster 29' />
+                <alias key='30' value='Cluster 30' />
+                <alias key='31' value='Cluster 31' />
+                <alias key='32' value='Cluster 32' />
+                <alias key='33' value='Cluster 33' />
+                <alias key='34' value='Cluster 34' />
+                <alias key='35' value='Cluster 35' />
+                <alias key='36' value='Cluster 36' />
+                <alias key='37' value='Cluster 37' />
+                <alias key='38' value='Cluster 38' />
+                <alias key='39' value='Cluster 39' />
+                <alias key='40' value='Cluster 40' />
+                <alias key='41' value='Cluster 41' />
+                <alias key='42' value='Cluster 42' />
+                <alias key='43' value='Cluster 43' />
+                <alias key='44' value='Cluster 44' />
+                <alias key='45' value='Cluster 45' />
+                <alias key='46' value='Cluster 46' />
+                <alias key='47' value='Cluster 47' />
+                <alias key='48' value='Cluster 48' />
+                <alias key='49' value='Cluster 49' />
+                <alias key='50' value='Cluster 50' />
+              </aliases>
+            </column>
+            <column datatype='integer' name='[Income]' role='measure' type='quantitative' />
+            <column caption='Sales Total' datatype='integer' name='[SalesTotal]' role='measure' type='quantitative' />
+            <column-instance column='[AdhocCluster:1]' derivation='None' is-adhoc-cluster='true' name='[none:AdhocCluster:1:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Income]' derivation='None' name='[none:Income:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[SalesTotal]' derivation='None' name='[none:SalesTotal:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Income]' derivation='Sum' name='[sum:Income:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[SalesTotal]' derivation='Sum' name='[sum:SalesTotal:qk]' pivot='key' type='quantitative' />
+            <style>
+              <style-rule element='mark'>
+                <encoding attr='color' field='[none:AdhocCluster:1:ok]' type='palette'>
+                  <map to='#499894'>
+                    <bucket>29</bucket>
+                  </map>
+                  <map to='#4e79a7'>
+                    <bucket>1</bucket>
+                  </map>
+                  <map to='#4e79a7'>
+                    <bucket>21</bucket>
+                  </map>
+                  <map to='#59a14f'>
+                    <bucket>5</bucket>
+                  </map>
+                  <map to='#59a14f'>
+                    <bucket>25</bucket>
+                  </map>
+                  <map to='#76b7b2'>
+                    <bucket>4</bucket>
+                  </map>
+                  <map to='#79706e'>
+                    <bucket>12</bucket>
+                  </map>
+                  <map to='#79706e'>
+                    <bucket>33</bucket>
+                  </map>
+                  <map to='#86bcb6'>
+                    <bucket>30</bucket>
+                  </map>
+                  <map to='#8cd17d'>
+                    <bucket>20</bucket>
+                  </map>
+                  <map to='#8cd17d'>
+                    <bucket>26</bucket>
+                  </map>
+                  <map to='#9c755f'>
+                    <bucket>9</bucket>
+                  </map>
+                  <map to='#9d7660'>
+                    <bucket>16</bucket>
+                  </map>
+                  <map to='#9d7660'>
+                    <bucket>39</bucket>
+                  </map>
+                  <map to='#a0cbe8'>
+                    <bucket>18</bucket>
+                  </map>
+                  <map to='#a0cbe8'>
+                    <bucket>22</bucket>
+                  </map>
+                  <map to='#b07aa1'>
+                    <bucket>7</bucket>
+                  </map>
+                  <map to='#b07aa1'>
+                    <bucket>37</bucket>
+                  </map>
+                  <map to='#b6992d'>
+                    <bucket>27</bucket>
+                  </map>
+                  <map to='#bab0ac'>
+                    <bucket>10</bucket>
+                  </map>
+                  <map to='#bab0ac'>
+                    <bucket>34</bucket>
+                  </map>
+                  <map to='#d37295'>
+                    <bucket>13</bucket>
+                  </map>
+                  <map to='#d37295'>
+                    <bucket>35</bucket>
+                  </map>
+                  <map to='#d4a6c8'>
+                    <bucket>15</bucket>
+                  </map>
+                  <map to='#d4a6c8'>
+                    <bucket>38</bucket>
+                  </map>
+                  <map to='#d7b5a6'>
+                    <bucket>17</bucket>
+                  </map>
+                  <map to='#d7b5a6'>
+                    <bucket>40</bucket>
+                  </map>
+                  <map to='#e15759'>
+                    <bucket>3</bucket>
+                  </map>
+                  <map to='#e15759'>
+                    <bucket>31</bucket>
+                  </map>
+                  <map to='#edc948'>
+                    <bucket>6</bucket>
+                  </map>
+                  <map to='#f1ce63'>
+                    <bucket>28</bucket>
+                  </map>
+                  <map to='#f28e2b'>
+                    <bucket>2</bucket>
+                  </map>
+                  <map to='#f28e2b'>
+                    <bucket>23</bucket>
+                  </map>
+                  <map to='#fabfd2'>
+                    <bucket>14</bucket>
+                  </map>
+                  <map to='#fabfd2'>
+                    <bucket>36</bucket>
+                  </map>
+                  <map to='#ff9d9a'>
+                    <bucket>11</bucket>
+                  </map>
+                  <map to='#ff9d9a'>
+                    <bucket>32</bucket>
+                  </map>
+                  <map to='#ff9da7'>
+                    <bucket>8</bucket>
+                  </map>
+                  <map to='#ffbe7d'>
+                    <bucket>19</bucket>
+                  </map>
+                  <map to='#ffbe7d'>
+                    <bucket>24</bucket>
+                  </map>
+                </encoding>
+              </style-rule>
+            </style>
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <lod column='[federated.0rzcav01b1yibk1865d9s00e26iq].[sum:SalesTotal:qk]' />
+              <lod column='[federated.0rzcav01b1yibk1865d9s00e26iq].[sum:Income:qk]' />
+              <color column='[federated.0rzcav01b1yibk1865d9s00e26iq].[none:AdhocCluster:1:ok]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='shape' value=':filled/circle' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0rzcav01b1yibk1865d9s00e26iq].[none:SalesTotal:qk]</rows>
+        <cols>[federated.0rzcav01b1yibk1865d9s00e26iq].[none:Income:qk]</cols>
+      </table>
+      <simple-id uuid='{E17B315C-8F14-40EC-B3A3-D5CAA3490099}' />
+    </worksheet>
+  </worksheets>
+  <windows saved-dpi-scale-factor='1.25' source-height='37'>
+    <window class='worksheet' maximized='true' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0rzcav01b1yibk1865d9s00e26iq].[none:AdhocCluster:1:ok]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0rzcav01b1yibk1865d9s00e26iq].[none:AdhocCluster:1:ok]</field>
+          </color-one-way>
+        </highlight>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{C1050029-0A64-4E92-8328-FA17091053E7}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      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
+      IQBBTvP/AQPGw4HW3BrnAAAAAElFTkSuQmCC
+    </thumbnail>
+  </thumbnails>
+</workbook>

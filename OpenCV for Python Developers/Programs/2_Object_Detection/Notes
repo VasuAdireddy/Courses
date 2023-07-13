@@ -1,0 +1,9 @@
+In this chapter we did Segmentation and Object Detection
+Methods:
+simple value-based thresholding
+Adaptive thresholding based on local brightness variances
+Edge detection to seperate object boundaries
+Using Gaussian blurs to reduce the impact of image size
+Use of dilation and erosion to reduce speckles or to expand/contract segmented areas
+
+

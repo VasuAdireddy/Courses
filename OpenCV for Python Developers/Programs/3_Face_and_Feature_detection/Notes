@@ -1,0 +1,27 @@
+Good features are invariant to transformations, like lightning
+Features are identified by classifiers
+detection is prior step to recognition
+
+Template Matching:
+It is readyly available for feature detection
+It works by searching similar pattern between two images, by taking a reference image called template and sliding around comparision image and taking difference at every position, it results in a black and white grayscale image with various intensities showing how well each position is matching.
+Black colour on grayscale image means, there is no match at that position.
+White means fully matching position.
+
+Limitations of Template Matching:
+Not scale invariant
+Not rotation invariant, (if templete is roatated, it may not work well)
+
+
+Har cascading:
+These har cascades are pretrained classifiers used for face detection.
+These come under supervised machine learning.
+These trian on prelabled images where faces exist.
+
+
+Additional Techniques to work
+Face recognition
+OCR text recognition
+Object Tracking and Optical flow
+Reading/generating QR codes
+

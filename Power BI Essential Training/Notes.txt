@@ -1,0 +1,151 @@
+conPower BI is used to analyze data and create visualizations.
+
+Power BI tools:
+Power BI service : web based service
+Power BI desktop : model, transform data
+Power BI Mobile Apps:
+Power BI report server :
+Power BI Developer :
+
+get data -> model data -> make reports and dashboards -> share with team
+
+Data Sources:
+Connect to an existing dataset
+import from XLSX or CSV
+create a new data source from scratch
+Upload a power BI file (PBIX file)
+
+we can copy table from word document and paste it in power query window to create a excel dataset.
+if we have any tabular data in excel or csv, we can copy and paste it in power query to use it in power BI
+
+Different viz's:
+Bar chart, Column chart, Line chart, Area chart, Pie chart
+
+Other Viz's:
+Combo charts (combination of two types of charts)
+Bubble chart, Scatter chart, Donut Chart, Gauge chart
+funnel chart (used to display pipelines or phases in sales / project)
+waterfall chart (used to show changes like ,variance over time)
+
+Text Visualizations:
+single numbered card (card that has one number in middle of it)
+Multi-row card (used to show details for a row or record)
+KPIs (used for key performance indicators, data where we have values and goals)
+Table , Matrix (looks like a excel spreadsheet)
+
+Geospatial Visualizations:
+Map
+Filled Map
+ArcGIS maps (used for embedded location based analytics)
+
+Other viz's:
+Treemap
+Slicer (used for filters)
+Image
+
+we can create a new report from scratch or by saving as a copy of existing report
+
+we can copy viz in one page and paste it in another page.
+
+if we download any new visualizations from the BI store, we can only use them for that report, if we want to use them for other reports to we need to right click on it and 'pin it to visualization pane'.
+
+if we delete a page and save the report, we cannot retrive the deleted report
+
+we can filter complete report/single page based on our requirements
+
+we can hide the filters pane from users, so they can not access it
+
+while users are in reading view and they have access to filters, if they applied any filters, they can click on reset button to come back to the base filters which i applied, whatever filters used by users will be undone.
+
+if we select/interact with any viz in a page by clicking some section on it, other viz's on the same page will also highlight the stuff regarding to that section.
+
+if we want to limit interactions to only speciifc viz in pag, we can go on top bar to interactions icon and enable edit interactions section.
+
+we can export out report to PDF
+Note: ArcGIS map will not support export, we cannot see it on exported PDF, some viz's we download from store will also do not appear in exported PDF
+
+we can also export to powerpoint presentation, each page of our report will come as a slide. similar to pdf, here also we will not get ArcGIS map
+
+we can embed live report into Power point, which means we can apply filters and chage viz's live on power point
+
+__________________________________________________________________________________________
+
+Dashboards :
+steps:
+create a report
+select a report viz
+pin it to a dashboard as a tile
+
+differences b/w report and dashboard:
+report can have one or more pages, dashboard is only one page
+report can be on only one dataset, dashboard can be of more than one dataset
+Filters and slicers can be used in report, No filtering and slicing in Dashboard
+Report can be created in PowerBI service or PowerBI Desktop, Dashboard can be created only on PowerBI service.
+
+to create a dashboard click on any visualization in report, we can see a pin symbol click on it to pin to existing dashboard or new dashboard
+
+we can add interactions in dashboard by Pinning live page to the dashboard, means pinning complete page as a dashboard.
+in this case, if we make any changes to report that changes will be automatically applied to the dashboard too, because we did a live pin.
+
+There are 5 types of tiles we can add to dashboard which do not come from reports, these are called standalone tiles
+-text box
+-Images (using url)
+-Videos (using url)
+-streaming data
+-other web content
+
+at first all standalone dashboards come with same size, later we can resize them.
+
+user can set alerts in any tiles in dashboard
+eg: if there is a tile showing sales in dashboard,user can set a alert that will send sales data to our mail for every hour or 24hr
+we will also get alerts in notification section in PowerBI
+
+users can also add comments to the dashboard, in comments we can mention people too
+user can also create a comment at the level of tile, mean user can comment on specific tile too. we can also disable comments for our dashboard.
+
+There is a subscribe option, which will send a snapshot of dashboard and data on timely bases. for using subscribe option user should have pro or premium powerBI.
+
+There is a Q&A section where users can check the Q&A section where they can find specific questions and answers.
+There is also a Q&A visualization which we can add in the report and pin to dashboard.
+In Q&A powerBI automatically answer to our questions by the terms we enter in Qustion tab, we get answers in viz's we can pin these answer viz's in dashboard.
+This Q&A sections eneables us to create viz's using natural language.(very important and easy way to create charts)
+
+sharing:
+Publish a report to the web
+embed a report in portals or websites
+embed a report in sharepoint online
+Display a report in teams
+create a workspace and invite people into it
+publish an app
+create a QR code for a dashboard tile
+
+other than public sharing, a powerBI Pro license is required
+
+we cannot create a app from My Workspace, we need to create a new workspace
+
+roles in a workspace:
+viewer : view and interact with items
+contributor : has all permissions as viewers, they can also pub,ish reports in the workspace. create,edit and delete workspace contents 
+Memebers : all contributor permissons, they can share an item or app, publish and update an app. add members, contributors and viewers.
+admin : one who created workspace, has all permisons as members, can add or remove admins, delete a workspace.
+
+every one we are adding as admin,member or contributor to our workspace requires a pro license
+viewer doesnot require pro license.
+
+__________________________________________________________________________________________
+
+Power BI Desktop:
+Get more types of Data
+create data models	(we can modify data in desktop, it will not effect original data  source)
+Relate data (we can work on different datasets)
+work offline
+
+there is no Power BI Desktop for Mac OS
+
+we can turn any viz we got in Q&A as a viz tile
+we can add synonyms of table names,column names which we think user might user in Q&A section
+
+In model view we can create relationships between tables on same column.
+we drag one column in one table and drop it in another column in another table, which we think have same content or attributes.
+After dropping power BI analysis the relation, wether it is 1-many or many-1 or 1-1 or any other and creates a relation.
+

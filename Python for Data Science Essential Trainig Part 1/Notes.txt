@@ -1,0 +1,26 @@
+--Similar languages live python for data science are: R,Go,Julia
+--Main Python Libraries for Data Science
+	Advanced Data Analytics : NumPy,Pandas,SciPy
+	Data Visualization : Matplotlib,Seaborn
+	Machine Learning : scikit-larn, TensorFlow, Keras
+____________________________________________________________________________
+
+***pandas
+-- It is used for data cleaning, preperation and analysis, easy to use for data visualization and machine learning
+-- It is built on top of NumPy.
+-- DataFrame object acts like a spreadsheet in Excel, here rows and columns are series objectives, they are indexable.
+
+-- By default missing values are represented as Nan in python
+-- If your dataset has 0's,99's or 999's , be sure to either drop or approcimate them as you would do for missing values
+-- Approximating missing values gives good overall results than just dropping missing values
+-- Topics in Missing values :
+-- Discovering Missing Values
+-- Filling Missing Values
+-- Counting Missing values
+-- Filter out missing values
+
+-- removing duplicates is very important to get accurate analysis
+-- concatination and transformation
+	useful for getting data into order and structure for analysis
+	concatination is combining data from seperate sources
+	transformation is converting and reformating data into the necessary format

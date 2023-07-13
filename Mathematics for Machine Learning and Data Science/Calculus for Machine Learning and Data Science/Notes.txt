@@ -1,0 +1,338 @@
+WEEK 1:
+
+Derivatives are used in machine learning for optimizing the functions, like minimizing and maximizing the function.
+Mostly used for loss functions.
+
+Sentiment analysis model is to analyze and extract emotions and opinions through text.
+
+Math concepts involved in training a model are:
+Gradients
+Derivatives
+Optimization
+Loss and Cost functions
+Gradient Descent
+
+Derivative is the instantaneous rate of change of a function.
+eg: instantaneous velocity of a car at a specific time
+instantaneous velocity at a interval = dx/dt = d(x2-x1)/d(t2-t1)
+
+Derivative at a point is the slope of tangent generated at that point.
+
+Slopes,Maxima and minima:
+
+if the tangent at any point is horizontal or the slope of that tangent is zero, at that point car is stopped.
+
+Maximum, is the point where the car is at maximum distanec, i.e the max point on the car.
+Note:  at the max point the car should be stopped, because if the car is not stopped, then max point will be more higher than that since it will go more further.
+imp: at the maxima and the minima the car is not moving, 
+maxima and minimum occurs at the point where derivative is zero or the tangent is horizontal.
+
+Derivative and notation:
+slope at a point = dx/dt
+in general derivatiove = dy/dx
+
+y = f(x)
+derivative of y = f'(x) => this is lagranges's notation
+derivative dy/dx = d f(x)/dx => laibniz's notation.
+
+common derivatives:
+derivative of constant y=c => dy/dx=0
+derivative of line y=ax+b => dy/dx= a(1)+0= a
+derivative of quadratic y=x^2 => dy/dx = 2x
+derivative of cubic y=x^3 => dy/dx = 3x^2
+derivative of inverse y=x^-1 or y= 1/x => dy/dx = -1x^-2
+y = x^n => dy/dx = nx^n-1
+
+if f and g are inverse functions then f'=1/g'
+y = sinx => y'=cosx dx
+y = cosx => y'=-sinx dx
+
+eulers number e=2.71828182...
+y = e^x => y'=e^x
+
+derivative of logx = 1/x
+
+non defferentiable functions: these are the functions where we cannot find derivative at every point.
+at sharp points in the graph, we cannot find derivative, because there might be many slopes at that region.
+discontinuity functions are non differentiable.
+A function with a vecticle tangent is non differentiable.
+
+multiplication by a scalar:
+f = 4g => f'=4g'
+sum rule:
+f=g+h => f'=g'+h'
+product rule:
+f=gh => f'=g'h+gh'
+chain rule:
+d/dt (f(g(h(t))) = df/dg. dg/dh. dh/dt
+		     =f'(g(h(t))).g'(h(t)). h'(t)
+
+
+Optimization:
+used for finding maximum or minimum function of a system.
+the slope at maximum and minimum points is always zero, but all points that are having slope zero doesnt mean they are minimum or maximum, they are called local minimum or local maximum.
+cost function is used for optimization.
+d/dx(cost function) = 0 => solve this to find the x values / local minimum / local maximum.
+-optimization of square loss
+-optimization of log loss
+__________________________________________________________________________________________
+
+WEEK 2:
+
+A tangent line in 1-D generalises to tangent plane in 2-D.
+
+if we have a function of 2 variables, we can the plot in 3-D, a tangent to that plot is not a line, it is a plane i.e 2-D tangent plane.
+
+Partial derivative:
+if we keep one variable as constant
+and calculate the slope, it is called partial derivative.
+f(x,y) = x^2 + y^2
+df/dx = 2x+0	-- since y is made constant, this is partial derivative wrt x
+slope  = 2x
+f(x,y) = 3x^2y^3
+df/dy = 9x^2y^2	-- partial derivative wrt y
+
+Gradients:
+if we have a function with 2 variables, we can slice it in two ways
+i) treating y as constant
+ii) treating x as constant
+gradient is a vector containing these two partial derivatives
+eg: f(x,y) = x^2+y^2
+df/dx = 2x
+df/dy = 2y
+Gradient = [2x 2y]    --- it is a single column
+nebla f = [df/dx df/dy]
+nebla is the symbol of gradient(reverse triangle)
+- Gradient at point (2,3) = [4 6]
+
+Gradients and maxima/minima : 
+here tangent plane is parallel to the floor ar maxima / minimum
+we get minimum at, where both partial derivatives are zero.
+set all partial derivatives to zero and solve that system of equations. to get maxima and minima substitute solutions in the equation.
+
+Analytical approach:
+to get the line, with less cost function:
+find points on line, that are closer to original point, such that it lies on same x axis.
+eg:
+p1(1,2) = 1,m+b		=> by substituting in y=mx+b, x=same as point i.e 1
+p2(2,5) = 2,2m+b
+p3 (3,3) = 3,3m+b
+now, distance from generated points on line
+p1 = (m+b-2)^2	=> i.e (y2-y1)^2
+p2 = (2m+b-5)^2
+p3 = (3m+b-3)^2
+total cost = p1+p2+p3
+	= after expansion we get
+E(m,b) = 14m^2+3b^2+38+12mb-42m-20b
+this is cost function, it should be minimum, now we know how to do that
+take partial derivatives of both m and b, and set them to zero, solve the equations
+we will get m and b,
+now we got our line y=mx+b after substitution.
+
+There is lot of calculations here, Gradient descent is a method used to minimize ant get results faster.
+
+Optimization using GRadient Descent in one variable:
+f(x) = e^x-log(x)
+f'(x) = e^x - 1/x
+-new point = oldpoint(x) - (alpha)*f'(x)
+-aplha is the learning rate, it should be so small to not jump large distance
+we should get new points until there is no big change, to the new point . i.e we should repeat the formula until there is not big change in new point.at end we get minima.
+
+Optimization using GRadient Descent in two variable:
+initial position (x0,y0)
+-new point(x1,y1) = (x0,y0) - alpha * (delta f(x,y))
+
+𝑥1=𝑥0−𝛼*(∂𝑓/∂𝑥(𝑥0,𝑦0))
+𝑦1=𝑦0−𝛼*(∂𝑓/∂𝑦(𝑥0,𝑦0))
+
+now same as before, keep finding new point until there is no big change in new point.
+at the end we can the minima.
+if there are more local minima, its hard to get or reach global minima, so to overcome this we need to find with different initial points, so somewhere we can hit the global minima.
+
+Optimization using GRadient Descent- least squares:
+E(m,b) = 14m^2+3b^2+38+12mb-42m-20b
+we can also solve the cost function using gradient descent to get minimum values of m and b.
+
+__________________________________________________________________________________________
+
+WEEK 3
+
+Regression with a perceptron:
+A perceptron is a type of artificial neural network used for binary classification tasks. While it is not commonly used for regression tasks, it is possible to modify the perceptron algorithm to perform linear regression.
+
+prediction function:
+function used to predict output
+--y_pred = w1x1+w2x2+b
+w1,w2  are weights, b is the bias value
+x1,x2 are inputs
+above is a summation function, which we are using to predict y
+
+loss function:
+it determines the error(MSE) based on the predicted value, for futher optimization of the model.
+error = (1/2)*(actual - predicted)^2
+
+our main goal is to minimize error, so that we need to find optimal w1,w2 and b values.
+
+now we use gradient descent to minize loss and find the above values
+y' = w1x1+w2x2+b
+L(y,y') = 1/2 * (y-y')^2
+
+y' => predicted value
+y => actual value
+
+what gradient descent will do is?
+w1 -> w1- alpha * dL/dw1
+w2 -> w2 - alpha * dL/dw2
+b -> b - alpha * dL/db
+it keeps on updating the above values, until there is a minimum value for them.
+
+dL/db = dL/dy' . dy'/db
+dL/dw1 = dL/dy' . dy'/dw1
+dL/dw2 = dL/dy' . dy'/dw2
+
+dL/dy' = (y-y') * -1 = -(y-y')
+dL/db = 1
+dL/dw1 = x1
+dL/dw2 = x2
+now lets substitute in above equations
+dL/db = -(y-y')
+dL/dw1 = -(y-y').x1 
+dL/dw2 = -(y-y').x2
+now substitute or update
+w1 -> w1- alpha * (-(y-y').x1)
+w2 -> w2 - alpha * (-(y-y').x2)
+b -> b - alpha * (-(y-y'))
+
+
+
+Classification with perceptron:
+same as linear regression but we need to change activation function.
+
+inputs : x1,x2
+weights : w1,w2
+bias inp : b
+
+summation func (z) : x1w1+x2w2+b
+activation func (sigmoid(z)): this will take all the numbers in number line and squeeze then in between 0 and 1
+y' = sigmoid(x1w1+x2+w2+b)
+
+sigmoid function : 1/(1+e^-z) = (1+e^-z)^-1
+derivative of sigmoid : after long derivation and factorization, we get
+1/(1+e^-z) . (1 - (1/ 1+e^-z)) = sigmoid(z) . 1-sigmoid(z)
+therefore, d/dz(sigmoid(z)) = sigmoid(z) * (1-sigmoid(z))
+
+loss function L(y,y') = -yln(y') - (1-y)ln(1-y')
+loss funtion is same as of probability of coins, like heads 7 times tail 3 on 10 tosses
+
+now we do gradiesnt descent
+dL/dw1 = dL/dy' .dy'/dw1
+dL/dw2 = dL/dy' .dy'/dw2
+dL/db = dL/dy' .dy'/db
+
+dL/dy' = -y/y' + (1-y)/(y-y') = -(y-y') / y'(1-y')
+below 3 are calculated based on deriavtive of sigmoid
+dy'/dw1 = y'(1-y')x1
+dy'/dw2 = y'(1-y')x2
+dy'/db = y'(1-y1)
+
+now we can calculate dL/dw1,dL/dw2,dL/db
+dL/dw1 = -(y-y')x1
+dL/dw2 = -(y-y')x2
+dL/db = -(y-y')
+
+w1 -> w1 - alpha * (-x1(y-y'))
+w2 -> w2 - alpha * (-x2(y-y'))
+b -> b - alpha * -(y-y')
+
+
+Classification with a Neural Network:
+A neural network is a bunch of perceptrons organized in layers, where the information of perceptrons is passed to next layer.
+
+lets say we have 2 perceptrons in first layer and 1 perceptron in second or last layer.
+output of 2nd layer gives y'
+outputs of 2 perceptrons in first layer are send to perceptron in 2nd layer as weights.
+
+z1=w11x1 + w21x2 + b1
+​z2=w12x1 +w22x2 +b2
+z = w1a1 + w2a2 +b
+here,
+a1 = sigmoid(z1)
+a2 = sigmoid(z2)
+
+L(y.y') = -y(logy') - (1-y)log(1-y')
+
+dL/dw11 = dz1/dw11 . da1/dz1 . dz/da1 . dy'/dz . dl/dy'
+similarly we need to find all the derivatives for dL/dw21 and dL/db1
+after that we need to upfate the 2nd layer too.
+
+
+Newtons Method:
+This is an alternative method to Gradient descent.
+This is fast and poerful, in principle it is used to find zeros.
+
+slope f'(x0) = f(x0) / x0 - x1
+x0-x1 = f(x0) / f'(x0)
+x1 = x0 - f(x0) / f'(x0)
+
+now we need to take derivative of f(x0) and f'(x0)
+until we get the minimum, for newtons method for optimization.
+
+eg: g(x) = e^x-log(x)
+	g'(x) = e^x - 1/x		// this is f(x)
+	(g'(x))' = e^x + 1/x^2	// yhis is f'(x) in our above formula
+let 
+x0 = 0.05   /first iteration
+noe take derivative and find where it hits zero
+x1 = x0 - g'(x0) / (g'(x))'
+we get x1 = 0.097,
+again we reapeat the same step to get x2 and soo on until we find the minima.
+
+the derivaitve of derivative is called second derivative i.e (g'(x))'
+leibniz notation : d^2 f(x) / dx^2
+
+If the second derivative of a function f(x) i.e f''(x) is equal to zero for every value of x​, it means f(x) is line.
+
+Concavity:
+if we have a concave up or convex function graph, i.e like smiling face, it means f''(x)>0, at this point we can find local minima
+if we have a concave down function graph, i.e like sad face, it means f''(x)<0, at this point we can find local maxima.
+
+The Hessain:
+it is a matrix full of second derivatives, it is used for multivariable newtons method.
+for function f(x,y),
+hassien matrix = [fxx(x,y) fxy(x,y)
+		     [fyx(x,y) fyy(x,y)]
+fxx => first derivate wrt x and second wrt x
+fxy => first on x and sexond on y
+fyx => forst on y and second on x
+fyy => first and second on y
+
+Hessians and concavity:
+let f(x,y) is the function
+delta f(x,y) is first derivative
+H(0,0) is hessian of f(x,y)
+not find eigen values of the hessian matrix
+det(H(0,0) - lamda(I)), we get a quadratic eqation
+after solving, if both lamda1 and lamda2 are positive, that means f(x,y) is concave UP and it has minima at point (0,0).
+if both lamda1 and lamda2 are negative, that means f(x,y) is concave DOWN and it has maxima at point (0,0).
+if one solution of lamda is positive and other is negative, then point (0,0) is called saddle point, which means it is neither minima not maxima.
+refer PPT for more clarification.
+
+Newtons method for teo variables:
+
+[x k+1  y k+1] = [xk  yk] - H^-1(xk,yk).delta f(xk,yk)
+
+
+Question:
+How many parameters has a Neural Network with:
+Input layer of size 3
+One hidden layer with 3 neurons
+One hidden layer with 2 neurons
+Output layer with size 1
+
+Answer:
+For a neural network with an input layer of size 3, one hidden layer with 3 neurons, another hidden layer with 2 neurons, and an output layer with size 1, the number of parameters is:
+Input layer to first hidden layer: (3 inputs + 1 bias) * 3 neurons = 12 parameters
+First hidden layer to second hidden layer: (3 neurons + 1 bias) * 2 neurons = 8 parameters
+Second hidden layer to output layer: (2 neurons + 1 bias) * 1 output = 3 parameters
+Therefore, the total number of parameters in this neural network is:
+12 + 8 + 3 = 23 parameters.

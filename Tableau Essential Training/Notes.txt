@@ -1,0 +1,186 @@
+-- Tableau file types
+Tableau workbook (.twb) = stores visualization without source data
+Tableau data source (.tds) = stores information required to access a data source
+Tableau bookmark (.tbm) = stores a connection to worksheet in another workbook
+Tableau data extraxt (.tde) = stores tableau data as a filtered and aggregated extract
+Tableau packaged workbook (.twbx) = stores extracted data and visualization for viewing in Tableau or Tableau Reader
+
+-- uses
+we can find the relationships between tables, just by adding the excel files
+We can clean up source data using data interpreter.
+We can do analytics also.
+
+-- operations on worksheets and workbooks
+can return to last saved state (clicking F12)
+Add,duplicate,rename worksheets
+Reorder, Clear, delete worksheets
+Show and hide worksheet elements
+save wb as a pdf
+create a packaged wb
+export data to CSV file
+export visualizations to Power point(.pptx)
+ctrl+M used to create new worksheet
+ctrl+N used to create new workbook
+Tableau Viewer is a free software used for viewing .twbx (packaged wb files), they cannot access, only view
+
+-- Arthematic Operators
++,*,-,/,%,^
+-- comparision operators
+=,>,<,>=,<=,<>
+-- logical operators
+AND,OR,NOT
+
+we can create a calculated feild by goint to Analysis > Create calculated feild
+column names are kept inside [] square braces
+we can also double click on 'Marks' card to create a calculated feild directly
+calculated feild created on shelf/'Marks' card cannot be used in other worksheets
+
+-- Commonly used functions
+SUM,AVG,MIN,MAX,STDEV,ABS,CEILING,FLOOR,ROUND
+
+-- 'Quick table calculations' works on rows
+
+-- Level of detail expression
+it has 3 keywords to control calculations
+include,exclude(will ignore a feild even though its part of calculation),fixed
+this is also a calculated feild, it should be added from analysis menu
+eg: syntax
+{INCLUDE [Cust State] :SUM([Order Total])}
+
+-- Summary Card
+it will show all (min,max,avg,sum...)
+it is available on 'worksheet' menu
+
+-- percentage contribution can be calculated from 'Analysis<Percentage of' option
+it can be calculated on rows,columns,pane, table
+
+-- Forecast will help to see the change over period of time 'Analysis<Forescast'
+it also shows the future value based on past
+
+--------------------------------------------------------------------------------
+
+-- we can sort data based on more than one feild using nested sort.
+
+-- we can select specific items by keeping it in filter column, so we will get only
+   required items on visualization.
+
+-- we use 'wildcard filters' to filter specific items/ patterns.
+   we need to drag feild into filters tab to apply any filters.
+   wildcards matching will find pattern irrespective of the case(uppercase/lowercase).
+
+-- we can organise data using limits
+
+, like data of states with < 100 sales.
+   this kind of filters is called 'condition filters'.
+
+-- 'top filter' used to filter out top 5/ top 10 values.
+   'bottom filter' used to filter out bottom 5/10 values.
+
+-- we can also filter using parameters. we can create parameters by 'Create<Parameter' option.
+   after creating parameter, we use it during filtering, instead of numbers,
+   we choose the created parameter, so data will filterout based on that parameter.
+   all parameters we created will be shown on left side tab under parameters section.
+   if we delete a parameter, all filters that are based on that parameter will be removed.
+
+-------------------------------------------------------------------------------------------------
+
+-- Groups: used to combine multiple items into single item
+   select items or rows and click on hyperlink symbol on top and select cust name
+   A new Cust Name (Group) field is added.
+
+-- Groups can be defined based on values that are related and then compare with another created group.
+-- 'Find' is used to find specific item to add to group if we have large dataset.
+    This option is also present in edit group section.
+
+-- we can define a set, like creating a set of states as a region.
+-- We can summarize data based on set.
+-- sets are represented with symbol (circle intersection circle)
+-- we can also combine two or more sets into single set.
+   select the sets and right click cursor by placing on any set and select combine sets.
+-- we can click any new item and click on drop down set icon, we can see option like add to any existing set.
+
+--------------------------------------------------------------------------------------------------------------
+
+common ways to summarize categorical data is using barcharts.
+vertical barcharts are called column charts.
+
+data which is associated with time, day or date. eg: line charts. these are called time serires data.
+such data are summarized using line charts.
+
+area fill charts show the share of contribution in reference with other dimensions of data.
+
+pie chart displays the contribution of several parts to a total.
+
+graphing 2 different attributes is done using scatter plots.
+
+we can identify cluster, using scatter plot,
+there is a cluster option in analytics bar, we need to drag it to our viz
+p-value, f-value and other statistics related to clusters can be seen in detail clusters tab.
+
+histogram summarize data in a vertical bar chart, where each bar represents te count of occurances.
+we can edit the bin size in tableau, for better analysis.
+we can right click on measure value and go to create to create custom bin.
+
+Tree map displays values as they contribute to a whole like  a pie chart.
+unlike piechart, tree map used shades of colours to show contribution.
+
+quiz:
+https://www.linkedin.com/learning/tableau-essential-training-14959992/quiz/urn:li:learningApiAssessment:38107198?autoSkip=true&autoplay=true&contextUrn=urn%3Ali%3AlyndaLearningPath%3A5ec59c4a498e70845153bbc5&resume=false
+
+_________________________________________________________________________________________________________________
+
+some feilds are easier to read when we apply formatting
+we can set currency format according to countries
+we can also highlight a specific value. highlight tables in show me will show colors based on value.
+if we hover our mouse on a specific bar/part in viz, we get info about it, that is called tooltip
+we can edit that tooltip and we can also keep visualization inside a tooltip.
+we can edit tooltip, my going to tooltip option in measures card.
+tooltip->insert->sheet->select the sheet that should come as tooltip.
+
+quiz : https://www.linkedin.com/learning/tableau-essential-training-14959992/quiz/urn:li:learningApiAssessment:38105594?autoSkip=true&autoplay=true&contextUrn=urn%3Ali%3AlyndaLearningPath%3A5ec59c4a498e70845153bbc5&resume=false
+_________________________________________________________________________________________________________________________
+
+Annotation : text on viz
+right click on the viz to add annotation
+we can change order of feilds that appear on viz.we can drag the feild on right legend up and down.
+if we close the legend tab by mistake, we can get it again from the analysis menu
+
+A trend line is a line that is used to display how performance is changed over time.
+trend lines is available in analysis menu
+
+we can add reference lins and quartile indicator to our viz.
+right click on vertical bar on the viz to find add refernce tab.
+
+quiz: https://www.linkedin.com/learning/tableau-essential-training-14959992/quiz/urn:li:learningApiAssessment:38103717?autoSkip=true&autoplay=true&contextUrn=urn%3Ali%3AlyndaLearningPath%3A5ec59c4a498e70845153bbc5&resume=false
+__________________________________________________________________________________________________________________
+
+maps can be created in tableau.
+we will have a measure names showing latitude and longitude, if we add them to rows and column,
+when tableau identify, if our data contains geographical data, like fields with globe symbol, it will automatically generate these latitude and longitude feilds.
+we will get the map on the viz.
+we can add zipcode, city or any geographic feild to marks card, so it will be displayed on viz.
+
+we can add layers to maps. that can be content or another geographic location.
+we can add background layers or maps using maps menu .
+we also do analysis using distance measurement tools.
+if we kkep the cursor on map, we see a small tab on left top of viz, we should select right focusing arrow over there,
+then chose a shape, like circle, then if we click at a place on viz and drag the cursor, we will get circle with distance
+so we can calculate the area from there.
+Note, if the distance is not showing, it means we are zoomed out, we nned to zoom in to find the distance.
+we can turnoff pan and zoom, from map->map options
+panning and zooming are enabled and disabled together, we can not use only one at a time.
+
+quiz : https://www.linkedin.com/learning/tableau-essential-training-14959992/quiz/urn:li:learningApiAssessment:38108071?autoSkip=true&autoplay=true&contextUrn=urn%3Ali%3AlyndaLearningPath%3A5ec59c4a498e70845153bbc5&resume=false
+___________________________________________________________________________________________________________________________
+
+we can create stories based on our visualizations.
+story creation icon is present at the bottom as a symbol of opened book.
+format menu also helps us to edit story backgrounds and colours etc.
+
+we can exchange one dashboard sheet with another.
+we can filter whole dashboard based on a sheet or a feild, that means all the sheets in dashboard will show the changes according to the filter.
+we can do that on dashboard menu then actions option.
+we can also make highlight actions.
+parameters help us create veratile filters in our workbook.
+
+quiz : https://www.linkedin.com/learning/tableau-essential-training-14959992/quiz/urn:li:learningApiAssessment:38107199?autoSkip=true&autoplay=true&contextUrn=urn%3Ali%3AlyndaLearningPath%3A5ec59c4a498e70845153bbc5&resume=false

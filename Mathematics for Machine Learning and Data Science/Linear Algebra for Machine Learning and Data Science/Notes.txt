@@ -1,0 +1,316 @@
+WEEK 1:
+
+***system of linear equations:::
+
+system of equations combine to give information.
+-A system which has many pieces of info is called a complete system
+-A system which has same piece os info is called redundant system
+-A system which has contradictory information is called contradictory system.
+- Redundant and contradictory systems are singular systems.
+- Complete system is non singular system.
+- non singular system is more informative, because it carries many equations
+- singular system is not more informative.
+- if a system has 2 redundant equations / sentences of info out of 3 equations
+- and another system has 3 redundant eq out of 3 equ, then second system is said to be more redundant
+- there is a measure called 'rank' used to measure the redundancy.
+
+system of equations:
+- if the system of equations have single solution, it is complete and non singular
+- if the system of equations habe multiple solutions, it is redundant and non singular
+- if the system of equations have no solution, it is contradictory and non singular.
+
+system of linear equations are represented as lines in the plane/graph
+
+constants will no effect the singularity and non singularity of the system of equations.
+
+system of equations to matrics:
+- a+b=0, a+2b=0 => [[1,1],[1,2]]
+- a+b=0, 2a+2b=0 => [[1,1],[2,2]]
+
+linear dependence and independence:
+- we can tell the system of equations is singular and non singular by seeing the matrics, without solving
+eg : [[1,1],[2,2]] => here rows 1 and 2  are relatable, if we multiply row 1 with 2 we will get row 2, by this we can
+     say that the matrics or system of equations is linearly dependent.
+eg : [[1,2],[1,1]] => here the matrics is linearly independent.
+
+The determinant:
+- determinant = product of diagnol elements - product of anti diagnol elements
+- it is a quick formula used to determine singularity
+- if determinant is 0, matrics is singular.
+- other than 0, matrics is non singular.
+[[a,b],[c,d]] => if ad-bc == 0, singular => if ad-bc != 0, non singular
+- you can check the formula with above system of equations.
+
+
+*** system of equations (3x3):
+- if the system of eqs has unique solution, it is complete => non singular
+- if the system of eqs has infinite solutions, it is redundant => singular
+- if the system of eqs has no solution, it is contradictory => singular
+
+linear dependence and independence:
+- if sum of any 2 eqs equals to 3rd equation, then system is linearly dependent.
+	eg: a+b+c=0, 2a+2b+2c=0, 3a+3b+3c=0
+- if we can get any equation by doing manipulations(add, mul, sub, div, with constants) with 2 equations, it is linearly dependent
+- if we can do manupulations to 1 equation and get any other one equation, then also dependent.
+- if no relations between equations, then it is independent.
+
+
+- linearly dependent => singular
+- linearly independent => non singular
+
+The determinant:
+eg: a1x+b1y+c1z =0, a2x+b2y+c2z=0, a3x+b3y+c3z=0
+	a1 b1 c1
+	a2 b2 c2
+	a3 b3 c3
+    determinant = (a1.b2.c3) + (b1.c2.a3) + (c1.a2.b3) - (c1.b2.a3) - (b1.a2.c3) - (a1.c2.b3)
+- if determinant == 0 => singular
+- if determinant !=0 => non singular
+
+note: if the matrics formed by equations is an upper triangle matrics, then the determinant will be non zero => linearly independant
+
+note : det=0 => dependent => singular => no unique sol
+	 det!=0 => independent => non singular => unique sol
+________________________________________________________________________
+
+WEEK 2:
+
+solving non singular system of linear equs:
+- these has unique solutions
+
+solving singular system of linear equs:
+- these has infinite or no solution
+- thses equations mostly related to each other
+
+matrix row reduction or gaussian elemination:
+- row echelon form => 1 a b
+			    0 0 c
+			    0 0 1
+	diagnol should have bunch of 1's or 0's or both mixed
+	below the diagnol all should be 0's
+	above the diagnol anything can present
+
+row operations on matrix that preserve singularity:
+- switching rows will not disturb singularity/ non singularity
+- multiplying a row by non zero scalar will also preserve the singularity/non singularity
+- adding one row to another and replacing that row will also not effect the singularity/non singularity
+
+
+Rank of a matrix:
+- it measures the amount of information carrying by the matrix ot system of linear equation
+- application: compressing images
+- eg: a+b=0,a+2b=0 => rank=2
+	a+b=0,2a+2b=0 => rank=1
+- rank = 2-dimension space
+- if a system of equations has 1 solution, dimeansion space = 0
+- if they has a line as a solution, which mean any point on that line is a sol, dimension space = 1
+- if they have all coefficients as 0, dimension space = 2
+
+- a matrix is non singular if rank is full, full means no of rows in that sys of eqs
+- any rank other than no of rows, then the sys is singular
+
+- the number of independent equations in the system is equal to the rank
+
+row echelon form is used to calculate rank:
+eg:   5 1
+	4 -3   
+=>divide each row with leftmost coefficient 
+ 	1 0.2
+	1 -0.75
+=>r2 = r2-r1
+	1 0.2
+	0 -0.95
+=>divide r2 by rightmost coefe
+	1 0.2
+	0 1
+
+eg: for singular matrix
+	5 1
+	10 2
+
+	1 0.2
+	1 0.2
+
+	1 0.2
+	0 0
+we cannot deivide 0/0 , so above matrix is row echelon form
+- for above, i followed same steps as precious eg
+
+- now the rank of the matrix is number of 1's in the diagnol of row echelon form of matrix.
+- pivot of a row is the first non zero number from left in a row in row echelon form.
+- rank of the matrix is number of pivots in matrix for big matrics.
+
+- reduced row echelon form:
+- it is same as row echelon, but here we need to make all numbers above pivot number 0, by doing some row operations.
+- all the numbers above pivot in its column should be made 0.
+
+_______________________________________________________________________________________________________________
+
+WEEK 3
+
+vectors and their properties:
+- vector is a sinple array of numbers.
+- magnitude/size and direction is very important in a vector
+- magnitude is calculated as the shortest distance and direction is calculated by the angle between(tan) axis and vector
+
+sum of vectors:
+let v1 vector coordinates are (1,3)
+	v2 vector coords are (4,1)
+then sum vector coords are (4+1,1+3) => (5,4)
+difference of vector is (4-1,1-3) => (3,-2)
+
+distance between vectors:
+lets say v1(1,5), v2(6,2)
+L-1 norm of distance is = |6-1| + |2-5| = 8
+L-2 norm of distance is = ((6-1)^2 + (2-5)^2)^1/2 = 5.83
+cosine distance i.e cos of angle b/w 2 vectors
+- L-2 norm distance is always equal to the square root od dot product of vector = (dot product)^1/2)
+
+multiply a vector by scaler:
+let v(1,2)
+2*v = (2,4)
+-2*v = (-2,-4)
+
+The dot product:
+let v1(6,2) v2(-1,3)
+dot product = (6*-1) + (3*2) =0
+- vectors with dot product 0 are called orthogonal vectors, i.e angle between them is 90 degrees.
+
+let v1,v2 and @ is angle between both
+dot product = |v1|.|v2|.cos(@)
+
+let say a vector u
+- all other vectors with dot product as 0 with u = will lie on the perpendicular to u
+- all other vectors with dot product as +ve with u =  wil lie on the same side of u with respect to u's perpendicular.
+- all ohter vectors with dot product as -ve with u = will lie on opposite side of u with respect to u's perpendicular.
+
+
+Matrices as linear transformations:
+- it is transfering data from one vector space to another.
+- we do matrics multiplication to each point with the matrics to get the new points
+eg: 	3 1
+    	1 2 is the matrics
+point 0,0 => 0,0
+	1,0 => 3,1
+	0,1 => 1,2
+	1,1 => 4,3
+
+- identity matrix is a matrix when divided by any matrix (A) results in same matrix (A).
+
+- matrix multiplication of matrix(A) and its transpose is always an identity matrix
+finding inverese:
+	5 2	a b	1 0
+	1 2 . c d = 0 1
+we will get a set of equations after solving this, from that we will find a,b,c,d. thus we get the inverse matrix.
+
+- matrics which have inverse matrics are non singular and invertible and determinant != 0.
+- matrics whihc do not have inverse matrix are singular and non invertible and determinant == 0.
+
+__________________________________________________________________________________________________________________________________
+
+WEEK 4
+
+- eigen values and eigen vectors are used in PCA which is dimensionality reduction algorithm.
+
+sigularity and rank of linear transformation:
+
+Determinant as an area:
+- in linear transormation determinent of the matrics is the area of the transormed equation.
+
+Determinant of a product:
+let A,B is the matrics
+det(A)*det(B) = det(AB)
+AB is the multiplication matrix of A and B
+
+- product matrics of singular and non singular matrix is always singular, because det(singular) = 0, if we product it with another,we always get 0 as result matrix.
+
+Determinent of Inverse:
+det(A^-1) = 1 / det(A)
+- det of A inverse = 1 divided by det of A
+
+- inverse of a matrics A
+step 1: find cofactor matrics of A
+step 2 : transpose the obtained matrix in step 1, it is called adjugate matrix
+step 3: no divide det(A) from adjugate matrix, the result is the inverse matrix of A.
+
+bases: are the vectors that can we used to go to any point in the plane
+no basis: two vectors which are in same direction, can not go to some points in the plane, these are called non basis.
+
+span : span of a set of vectors is the set of points that can be reached by walking in direction of these vectors in any combination.
+eg: span of bases in a plane, because bases vectors can go to any point in plane
+
+a basis is a minimal spanning set
+a vector through origin in basis to the line passing through origin
+two vectors one after another in same direction is not basis eventhough a line passes through them, bacause they are two many vectors
+
+number of elements in the basis of a space is the dimension of the space.
+
+Eigenbases:
+these bases are more important than other bases, there are important for PCA?
+
+if the vector before and after linear transformation have the same shape, then the bases used in this vectors are called eigen basis
+these vectors are called eigen vectors, and the streching factors are called eigen values.
+
+finding eigenvalues:
+if we take difference between two matrices and multuply it with vector x y, we can zero vector if these matrics are singular.
+if non zero then the matrics are non singular.
+
+if lamda(@) is the eigen value, then
+2 1   @ 0
+0 3 - 0 @  will have infenetily many solutions,
+ det	2-@ 1 	
+	0   3-@ =	0
+(2-@).(3-@) - 1.0 = 0 => this is charectaristic polynomial.
+solving this will give eigen values
+
+matrics * vector = eigen value *  vector
+after getting eigen values, we can find eigen vectors by this method
+below 2 is eigen value.
+2 1   x	  x
+0 3 . y = 2 . y
+
+2x+y=2x
+0x+3y=2y
+
+solving this we get x=1,y=0, so vector is 1 0
+
+eg for eigen vectors:
+Sure, let's find the eigenvectors corresponding to the matrix A = [[9, 4], [4, 3]] and its eigenvalues λ1 = 11 and λ2 = 1.
+
+Step 1:
+For λ1 = 11, we need to find the null space of the matrix (A - λ1I) = [[-2, 4], [4, -8]].
+
+Solving the system of linear equations (A - λ1I)x = 0, we get:
+-2x1 + 4x2 = 0
+4x1 - 8x2 = 0
+
+Simplifying the equations, we get:
+x1 = 2x2
+
+So the null space of (A - λ1I) is the set of all vectors of the form [[2, 1]]. A basis for this null space is the vector [2, 1].
+
+Step 2:
+For λ2 = 1, we need to find the null space of the matrix (A - λ2I) = [[8, 4], [4, 2]].
+
+Solving the system of linear equations (A - λ2I)x = 0, we get:
+8x1 + 4x2 = 0
+4x1 + 2x2 = 0
+
+Simplifying the equations, we get:
+x1 = -2x2
+
+So the null space of (A - λ2I) is the set of all vectors of the form [[-2, 1]]. A basis for this null space is the vector [-2, 1].
+
+Step 3:
+The eigenvectors corresponding to λ1 = 11 and λ2 = 1 are the vectors [2, 1] and [-2, 1], respectively.
+
+Therefore, the eigenvectors corresponding to the matrix A = [[9, 4], [4, 3]] and its eigenvalues λ1 = 11 and λ2 = 1 are [2, 1] and [-2, 1], respectively.
+
+note, if we are finding eigen values of A-B matrics
+if any one matricx is identity matrics, then we can eliminate that and find for other matrics alone.
+eg: A = [[1 2],[0 4]] B= [[1 0],[0 1]]
+
+_________________________________________________________________________________________
+
+Reference book:
+https://www.khanacademy.org/math/algebra
