@@ -1,0 +1,14 @@
+-Hadoop is an open source project from Apache Software Foundation.
+- Hadoop is written in Java
+- It can effeciently process large volumes of data on clusters of commodity hardware (cheap/low level machines)
+- hadoop can be setup on a single machine, but real power of hadoop comes with cluster of machines.
+- consists two key parts:
+  1)Hadoop Distributed File systems(HDFS) : Distribuited Storage & Data Protection Across Physical Servers
+  2)Map-Reduce : Distributed Computing Across Physical Servers.
+- Hadoop stores data as it is in its file system (HDFS).
+- Apache Hadoop is platform for data storage as well as processing
+- Has flexibity to store and Mine any type of data
+- Hadoop works in Master and Slave fashion
+- Master doesnt do any work, it assigns the work to slaves and get the results.
+- Multiple masters are there for a cluster of slaves, because if any master goes down other master takes charge so that the clusters job will be uneffected.
+- eg: user gives work to master, master distributes the work to all the slaves in that cluster and egt work completed.

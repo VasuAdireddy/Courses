@@ -1,0 +1,96 @@
+Algorithm : An algo is a mathematical technique or equation, that is not concrete. it contains parameters that are not filled
+eg : y=mx+b
+
+Model : its is concrete. it is an equation with filled parameters by values that are learned from data.
+eg : y=3x+5
+
+steps in building model:
+-explore and clean data
+-split data into train/validation/test
+-fit initial model and evaluate
+-tune hyperparameters
+-Evaluate on validation set
+-select and evaluate the final model on test set
+
+validation dataset is used to update model hypeeparameters.
+so the breakthrough would look like, train=60%, validation = 20% and test = 20%.
+
+
+Logistic regression : 
+it is a type of regression, where the target variable is binary.
+y=1/1+e^-(mx+b)
+from sklearn.linear_model import LogisticRegression
+hyperparameters:
+- C : C hyperparameter is a regularizarion parameterin Logistic regg that controls how closely the model fits to the training data.
+regularization is a technique to reduce overfitting.
+overfitting occurs when the model fits too closely to training data.
+C = 1/lamda, where lamda is original regularization parameter.
+if C -> 0,  then lamda -> infinity , that means high regularization, more likely to underfitting
+if C -> infinity, then lamda -> 0, that is low regularization, more likely to overfit.
+-How many individual Logistic Regression models were fit using GridSearchCV? ANS: 35
+-Logistic Regression is a good choice when you have a massive amount of data or you're trying to solve a state of the art problem. ANS: False
+
+
+SVM:
+it is a classifier that finds a optimal hyperplane that maximizes the margin between two classes.
+In SVM, a hyperplane is used to separate data into different classes. The hyperplane is chosen in such a way that it maximizes the distance between the closest data points from each class, also known as the margin. This distance is known as the margin, and the goal of SVM is to find the hyperplane that maximizes it.
+Kernel trick : kernel method used to transform data that is not linearly seperable in n-dimensional space to a higher dimension where it is linearly seperable.
+
+SVM can be used where we have lot of features and low rows.
+can handle data with lot of outliers.
+can use where there are very complex relationships.
+it takes more time to train and predict
+
+from sklearn.svm import SVC
+
+k-fold cross validation is a way to robustly test the model, to make sure we are getting good feel for the range of outcomes.
+
+SVC has kernel hyperparameter.
+we have 5 kernel options : linear, polynomial, rbf, sigmoid, precomputed
+
+GridSearchCV is used for cross validation to defined number of folds
+
+
+Multilayer perceptron ::
+It is a classic feed forward artificial neural network, the core component of deep learning.
+It is a connected series of node, where each node represents a function in model
+can be used for both categorical or continuous target variable
+used for very complex relationships or performance is the only thing that matters
+
+from sklearn.neural_network import MLPRegressor, MLPClassifier
+print(MLPRegressor())	// prints all the hyperparameters present in the regressor.
+
+hyperprarameters:
+-hidden_layer_sizes = determines how many hidder layers are there and how many nodes in each layer.
+-activation function = dictates the type of nonlinearity that is introduced to the model. (sigmoid, TanH, ReLU)
+-learning_rate = how quickly and wether or not the algorithm finds optimal solution.
+
+
+Random Forest:
+collection of independent decision trees to get a more accurate and stable prediction.
+can be used for both continuous and categorigal target variable
+it takes less time to train but more to predict
+
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+
+hyperparameters:
+-n_estimators : no of individual different decision tress
+-max_depth = how deep each individual decison tree can go.
+
+
+Boosting:
+it is an ensemble method that aggregates a number of weak models to create a strong model.
+Boosting effectively learns from its mistakes with each iteration.
+unlike RF, here each successive model learns from mistakes done by previous model.
+it picks the best my using weighted voting of each individual model.
+can be used for both continuous and categorigal target variable
+
+from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
+
+hyperparameters:
+-n_estimators 
+-max_depth
+-learning_rate
+
+
+we cannot say this is the best algo for good predictions, we dont know which model fits the data best, so we should test our data on all the models and find the best performing model.

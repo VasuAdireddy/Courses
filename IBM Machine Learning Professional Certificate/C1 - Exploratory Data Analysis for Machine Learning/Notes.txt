@@ -1,0 +1,410 @@
+know why, if you want your brain to remember
+
+Week 1:
+
+Deep Learning is subset of ML, ML is subset of AI.
+
+AI : A program that can sense, reason, act and adapt
+ML : Algorithms whose performance improve as they are exposed to more data over time.
+DL : subset of ML in which multilayered neural networks learn from vast amount of data.
+
+
+ML:
+The study and construction of programs that are not explicitly programmed, but learn patterns as they are exposed to more data over time.
+These learn from repeatedly seeing data, rather than being programmed by humans.
+features and target are important terms for a ML model or algorithm.
+
+Two main types od ML:
+Supervised : Has target column, make predictions of target column, eg: Fraud Detection
+Unsupervised : no target column, find structure in the data, eg: Customer Segmentation
+Limitations:
+determining cat or dog, describing features.
+These are outcomed by DL.
+
+
+DL:
+this is ML with very complicated models called deep neural networks.
+
+Two spaces where there is drastic change due to impact of Modern AI
+Computer Vision : eg: Self driving vehicles
+NLP : eg: language translation
+ 
+ML Workflow:
+Problem statement
+Data Collection
+Data Exploration & Preprocessing
+Modeling
+Validation
+Decision Making & Deployment
+
+ML Vocabulary:
+Target : category / value that we try to predict
+Features : properties of data used for prediction (predictors)
+Label : the target value for a single data point.
+
+Factors that have contributed to the current state of Machine Learning are:
+bigger data sets, faster computers, open source packages, and a wide range of neural network architectures.   
+__________________________________________________________________________________________
+
+WEEK 2:
+
+Reading CSV files:
+CSV files are rows of data seperated by commas.
+data = pd.read_csv(filepath)
+data = pd.read_csv(filepath, sep='\t') 	# this is used for tab seperated files (.tsv)
+if our data has different white space seperated, then we can use below code
+data = pd.read_csv(filepath, delim_whitespace=True)
+data = pd.read_csv(filepath, header =None)	# dont use first row as column names
+data = pd.read_csv(filepath, names=['Name1','Name2'])	# setting column names explicitly
+data = pd.read_csv(filepath, na_values = ['NA',99])	# identify 'NA' & 99 as Null values in df.
+data.to_csv("ouput.csv")    # write df to CSV
+
+Reading JSON Files:
+JSON : JavaScript Object Notation
+JSON files are similar in structure to python dictionaries.
+data = pd.read_json(filepath)   #reading JSON
+data.to_json('Output.json') #write df to JSON
+one row JSON will look like :
+[{"id" : 200, "name" : "Virat", "Age" : 38}]
+
+Working wiht SQL Database:
+SQL : Structured QUery Language, represents set of relational databases with fixed schemas.
+There are many different SQL databases, which function similarly with small syntax differences.
+eg: Microsoft SQL Server, Postgre, MySQL, AWS Redshift, Oracle DB, Db2 Family
+Using python library we can connect to database and pull data from the database.
+popular packages are : sqlite3, SQLAlchemy, Psycopg2 for Postgre database, ibm_db for Db2 Family. 
+#syntax
+import sqlite3 as sq3
+path = '....rock.db'
+con = sq3.Connection(path)	#creates a connection to Database
+query = '''SELECT * FROM rocksong'''	#specifying query, rocksong is table in our database
+data = pd.read_sql(query,con)	   #create a df
+
+Working with NoSQL Databases:
+NoSQL : Not-only-SQL, databases are not relational, vary more in structure.
+Most NoSQL databses store data in JSON.
+Examples:
+Document databases : mongoDB, couchDB
+Key-value stores : Riak, Voldemort, Redis
+Graph databases : Neo4j, HyperGraph		#used for network analysis, maintaining connections
+Wide-column stores : Cassandra, HBase
+#syntax
+from pymongo import MongoClient
+con = MongoClient(connection_string)	#create connection
+db_names = con.list_database_names()	#used to see available databases
+db = con.database_name		#selecting database
+cursor = db.collection_name.find(query)	# out put of this cursor is generator object with all JSON objects, so we use list in next step
+df= pd.DataFrame(list(cursor))    #created df
+
+APIs and Cloud Data Access:
+A variety of data providers make data available via API (Application programming interfaces), that makes it easy to access such data via python.
+Like, we can plug into Twitter using an API and get access to different tweets
+Like, pulling marketing data from Amazon.
+
+we can use url also
+data_url = 'http://...'  # this url contains a CSV file hosted
+df = pd.read_csv(data_url, header=None)
+
+
+Data Cleaning:
+Key aspects that are used in ML workflow are dependent on cleaned data.
+Those aspects are Observations, Labels, Algorithms, Features, Model.
+Since all these required cleaned data, our first step is to clean data.
+Main problems companies face:
+Lack of Data, Too much Data, Bad Data
+How can Data be messy? :
+Duplicates or unnecessary Data
+Inconsistent text or typos
+Missing Data
+Outliers
+Data Sourcing issues
+
+Working with Duplicates:
+Drop the duplicates
+
+Working with Missing Data:
+Remove the data: remove the row entirely (not a good solution, if we ave too many rows with missing values)
+Impute the data : replace missing values with mean, mode, average
+Mask the data : create a category for missing values.
+
+Working with Outliers:
+An outlier is an observation in data that is distant from most other observations.
+Typically these observations do not accurately represent the model phenomenon we are trying to explain
+it is important that some outliers are informative and provide insights, like if all obs are between 10 and 50 , and an outlier is 3000, that will give info of why it is 3000 ,what are the reasons for that.
+How to find Outliers:
+We can use plots like Histogram, Density plot or box plot.
+We can use statistics like IQR, standard deviation
+We can use Redisuals: These are difference between actual value and predicted value.
+Residuals represent model failure.
+Approaches to calculating residuals:
+standardized : residual divide by standard error
+Deleted residuals : remove the observation and see the model prediction/performance, to check wether there is big difference or not.
+Studentized : Deleted residuals divided by residual standard error.
+- We can remove outliers
+- We can assign mean/median to outliers
+- we can transform the column that has outlier, like log transformation
+- we can predict the outlier, by using similar orservations
+- we can keep them
+
+
+Summary/Review
+Retrieving Data
+You can retrieve data from multiple sources:
+SQL databases
+NoSQL databases
+APIs
+Cloud data sources
+
+The two most common formats for delimited data flat files are comma separated (csv) and tab separated (tsv). It is also possible to use special characters as separators.
+SQL represents a set of relational databases with fixed schemas.
+
+Reading in Database Files
+The steps to read in a database file using the sqlite library are:
+create a path variable that references the path to your database
+create a connection variable that references the connection to your database
+create a query variable that contains the SQL query that reads in the data table from your database
+create an observations variable to assign the read_sql functions from pandas package
+create a tables variable to read in the data from the table sqlite_master
+JSON files are a standard way to store data across platforms. Their structure is similar to Python dictionaries.
+NoSQL databases are not relational and vary more in structure. Most NoSQL databases store data in JSON format.  
+
+Data Cleaning
+Data Cleaning is important because messy data will lead to unreliable outcomes.Some common issues that make data messy are: duplicate or unnecessary data, inconsistent data and typos, missing data, outliers, and data source issues.
+You can identify duplicate or unnecessary dataCommon policies to deal with missing data are:remove a row with missing columns, impute the missing data, and mask the data by creating a category for missing values.
+Common methods to find outliers are: through plots, statistics, or residuals.
+Common policies to deal with outliers are: remove outliers, impute them, use a variable transformation, or use a model that is resistant to outliers.
+
+__________________________________________________________________________________________
+
+WEEK 3:
+
+EDA:
+it is an approach to analyzing data sets to summarize their main characteristics, often with visual methods.
+This tells us to determine wether our data is clean, or is it enough to analysis
+It helps us in finding patterns and trends
+Summary statistics include in EDA:
+Average, Median, Mean, Min, Max, Correlations, etc.
+VIsualizations include:
+Histograms, Scatter plots, Box plots, etc
+
+sample() methos uses to select random n rows in data as a sample.
+
+Visualization libs:
+Matplotlib
+seaborn (statistically focused plotting)
+
+FaceGrid in seaborn is used for visualizing in grid format, we can map other visualizations to grid using .map()
+
+
+Feature Engineering :
+Variable Transformation:
+it is required for getting better insights and viz's.
+log transformation : changing values of fearutes into logarithmic values
+log transformations can be useful for linear regression.
+We can transform features into different order polynomial fearures, like squarea of variables.
+syntax for polynomial featutes:
+from sklearn.preprocessing import PolynomialFeatures
+polyFeat = PolynomialFeatures(degree=2)
+polyFeat = polyFeat.fit(X_data)
+X_poly = polyFeat.transform(X_data)
+
+variable tranformation include encoding and scaling.
+variables must often be transformed before including in a model.
+log transformation is used to reduce skewness, to compress and to linearize relationships
+
+Feature Encoding:
+Encoding is often applied on categorical features. There are two such types of features.
+Nominal: categorical variables that take values in unordered categories. eg: red, blue, green; True, False
+Ordinal: categorical variables that take values in ordered categories. eg: High, Medium, Low
+Approaches to encoding variables:
+Binary Encoding: used for 2 valued variables.
+eg: Yes-no : encoded into 1-0
+One-hot encoding : it takes every unique value and creates a new column with values 0 and 1 for True/False
+Ordinal Encoding: involves converting ordinal categories into numerical values.
+
+Feature Scaling: 
+This invloves adjusting a variables scale to allow comparison of variables with different scales.
+Different continuous variables may have differet scales (like 0-100, 1000-10000)
+We need to get all these variables into same scale.
+Beware that scaling is possible to be effected by outliters.
+Approcahes to Scaling:
+Standard Scaling : converts features to standard normal variables
+(by subtracting the mean and dividing by the standard error)
+Min-Max Scaling : Converts variables to continuous variables in (0,1) interval by mapping minimum values to 0 and maximum values to 1.
+(by subtracting with min values and dividing it by max-min)
+This is sensitive to outliers.
+Robust Scaling : similar to Min-Max, but instead of maps the interquartile range
+(75% value - 25% value)
+This is robust to outliers(not much effected by outliers) but doesnot ensure the value will remain between (0,1).
+
+Common Variable Transformations based on feature type:
+Feature type - Transformation
+--Continuous    - Standard, Min-Max, Robust Scaling
+#imports
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
+--Nominal(categorical, unordered,(True/False) - Binary, One-hot Encoding
+#imports
+from sklearn.preprocessing import LabelEncoder, LabelBinarizer, OneHotEncoder
+from pandas import dummies	# same as One-Hot Encoding
+--Ordinal(categorical, ordered,(movie rating)) - Ordinal Encoding (0,1,2,3)
+#imports
+from sklearn.feature_extraction import DictVectorizer
+from sklearn.preprocessing import OrdinalEncoder
+
+
+data = data.fillna(method='ffill')
+# fills last observed non null value in null values place
+
+The Box-Cox transformation is a technique used to transform non-normal data distributions into a more normal or Gaussian-like distribution. It does this by applying a power transformation to the data. Specifically, it raises the data to a power that is determined by a parameter, lambda (λ), which is estimated from the data.
+
+
+Summary/Review:
+Exploratory Data Analysis
+EDA is an approach to analyzing data sets that summarizes their main characteristics, often using visual methods. It helps you determine if the data is usable as-is, or if it needs further data cleaning.
+EDA is also important in the process of identifying patterns, observing trends, and formulating hypothesis.
+Common summary statistics for EDA include finding summary statistics and producing visualizations.
+Feature Engineering and Variable Transformation
+Transforming variables helps to meet the assumptions of statistical models. A concrete example is a linear regression, in which you may transform a predictor variable such that it has a linear relation with a target variable.
+Common variable transformations are: calculating log transformations and polynomial features, encoding a categorical variable, and scaling a variable. 
+
+__________________________________________________________________________________________
+
+WEEK 4:
+
+statistical estimation and inference:
+estimation is the application of an algorithm, for example taking an average.
+inference involves putting an accuracy on the estimate, example standard error of an average.
+
+Machine learning and statistical inference are similar.
+in both we use sample data to infer qualities of a distribution. like data generation process.
+ML applications that focus on understanding parameters and individual effects involve more tools from statistical inference.
+
+eg:
+customer churn, occurs when a customer leave
+we can predict that wether he leaves or not based on some features like
+the length of time as customer, recent purchases,etc.
+churn prediction is often approached by predicting a score for individuals that estimates the probability the customer will leave.
+Estimation : estimation of factors/features driving customer churn involves measuring the impact of each factor/features in predicting churn.
+inference : invloves determining whether these measured impacts are statistically significant.
+if churn rate is closer to 1, it means the customer will leave or may leave.
+we use plots of different featues along with churn rate, to determine which features are effecting more on churn rate, this comes under estimation.
+
+parametric vs non-parametric:
+if an statistical inference is trying to find out the data-generation process, then we can say that a statistical model is a set of possible distributions or maybe regressions.
+
+A parametic model is a type of statistical model, it is also a set of distributions or regressions, but they have a finite number of parameters. It rely on strict assumptions made by distributions.
+most common way of estimating parameters in a parametric model is through maximum likelihood estimation (MLE).
+likelihood function is related to probability and is a function of parameters mean and sdv, it takes our data and return most probable mean and sdv.
+eg: normal distribution, it depends on set number of parameters namely mean and sdv.
+
+A non parametric model, here our data not rely of particular distributions, it is distribution-free inference.
+eg: creating a distribution of data (CDF or cummulative distribution function) using a histogram.
+
+Commonly used distributions:
+-Uniform distribution :  we will get any value in range have uniformly equal chance, if we roll a die, the chances of getting 1 is equally likely to getting any other number.
+-Normal/Gaussian distribution : the most likely value are the values that are closest to the mean. equally unlikely as we move away from mean.
+Central limit theorem makes normal distribution popular, the idea is that if we take average values from different sample, the distribution of those averages is going to be a normal curve.
+eg: in real world heights, most people are closest to the average height than tallest or smallest.
+-Log Normal distribution :  if we take log of the values, we will have a normal distribution.
+in real world, we can see this in places of money, househols incomes.
+-Exponential distribution :  in this distribution the curves are more closer to left side. it is not much time effective.
+like if i see the distribution now and someone else sees it after 20 minutes, the distribution will not have more changes even though the data changes.
+-Poisson Distribution : the number of evemts that happened at certain amount of time. mean and variance of poisson distribution is same i.e lamda.
+eg: how many people are going to watch this video in next 10 minutes?
+
+Frequentist vs Bayesian statistics:
+Frequentist statistics is concerned with repeated observations in the limit.
+Bayesian describes that the parameters themselves can have probability distributions.
+dayesian allows us to do prior distribution before seeing the data.
+prior distribution is later upadated after seeing the data
+after updation the data is called posterior distribution.
+
+We use same math for frequentist and bayesian satatistics, the element that differs is interpretation.
+----
+Estimation refers to the process of using sample data to estimate an unknown parameter of a population. The goal of estimation is to obtain a point estimate or an interval estimate of the population parameter based on the sample data. For example, estimating the average weight of a population based on a sample of weights.
+
+Inference, on the other hand, refers to the process of making conclusions or predictions about a population based on sample data. Inference involves using the sample data to make inferences about the population parameter and to assess the reliability of these inferences. For example, using a sample of test scores to infer the average score for the population.
+
+So, in statistics, estimation is like making a good guess about something we don't know for sure based on some information we have. Inference is like making a conclusion or prediction based on the information we have.
+
+--
+Hypothesis Testing :
+A hypothesis is a statement about a population parameter.
+-Null hypothesis
+- the alternative hypothesis
+we decide what we want to call null hypothesis, anything other than null comes under alternative hypothesis.
+eg: an average 5 persons entering a room, so 5 will be null and anything other than 5 like (6,7,..) will be alternative.
+
+hypothesis testing procedure gives us rules to decide wether to accept or reject the values as null hypothesis.
+
+In bayesian interpretation, we wont get decision boundray, rather we get posterior probabilities of null or alternative hypothesis.
+
+if we have 2 probabilities of an event, we calculate likelihood ration by dividing one upon another.
+eg: the probability of coin 1 giving 3 heads is 0.117
+the probability of coin 2 giving 3 heads is 0.009
+c1(3)/c2(3) = 0.117/0.009 = 13
+13 is likelihood ratio
+coin 1 was 13 times more likely to give us 3 heads than coin 2
+
+in bayesian hypothesis, we need prior hypothesis
+eg : P(H1) = 1/2 ; P(H2) = 1/2
+P(H1/x) = [P(x/H1)*P(H1)]/ P(x)
+likelihood ratio = P(H1/x) / P(H2/x) = [P(x/H1)*P(H1)] / [P(x/H2)*P(H2)]
+based on numerator and denominator ratio we get above, we calculate the hypothesis.
+
+Neyman-pearson paradigm: gives an updown vote on H0 vs H1
+lets say,
+H0 - null hypothesis is we are working with fair coin, it has 50-50 chance to head and tail
+H1 - alternative hypothesis is its not a fair coin.
+In hypothesis testing there are two types of errors
+-Type 1 error - incorrectly rejecting the null hypothesis, mean we are working with fair coin but we make error seeing our sample data, we decide to reject the null hypothesis.
+-Type 2 error - incorrectly accept the null, we are working with a bais coin but we decide to accept it as fair coin seeing our sample data.
+-- power of test = 1 - P(type 2 error)
+
+Hypothesis testing terminology:
+-the likelihood ratio is called test statistic.
+-the rejection region is a set of values of the test statistic that lead to rejection of H0 null hypothesis.
+-the acceptance region is the set of values of test statistic thet lead to the acceptance of H0.
+-the null distribution is the test statistics distribution assuming null hypothesis is true.
+
+Significance level and p-values:
+-significance level(alpha) is a probability threshold below which the null hypothesis will be rejected.
+-p-value : is small significance level at which the null hypothesis would be rejected.
+-confidence interval : the values of the statistic for which we accept the null.
+-F-statistic: is a statistical measure that is used to determine whether two variances are significantly different from each other.
+- probability of at least one type 1 error is approximately = 1-(1-0.05)^(no of tests)
+-bonferroni correction: we use p threshold so that the probability of making a type 1 error is 5%. this allows the probability of type 1 error to be controlled.
+p threshold = 0.05/no of tests
+
+Correlation vs Causation:
+if x and y are correlated, then we can say that x is useful in predicting y.
+reasons why x and y correlated:
+x causes y (causation)
+y causes x (causation)
+x and y are caused by something else, that something is called confounding variable.
+x and y are unrelated at all
+eg: student scores are positively correlated with amount of time studied.
+
+
+Summary/Review
+Estimation and Inference
+Inferential Statistics consist in learning characteristics of the population from a sample. The population characteristics are parameters, while the sample characteristics are statistics. A parametric model, uses a certain number of parameters like mean and standard deviation.
+The most common way of estimating parameters in a parametric model is through maximum likelihood estimation.
+Through a hypothesis test, you test for a specific value of the parameter.
+Estimation represents a process of determining a population parameter based on a model fitted to the data.
+The most common distribution functions are: uniform, normal, log normal, exponential, and poisson.
+A frequentist approach focuses in observing man repeats of an experiment. A bayesian approach describes parameters through probability distributions.
+
+Hypothesis Testing
+A hypothesis is a statement about a population parameter. You commonly have two hypothesis: the null hypothesis and the alternative hypothesis.
+A hypothesis test gives you a rule to decide for which values of the test statistic you accept the null hypothesis and for which values you reject the null hypothesis and accept he alternative hypothesis.
+A type 1 error occurs when we reject the null hypothesis when it is actually true.
+A Type 2 error occurs when we fail to reject the null hypothesis when it is actually false.
+
+Significance level and p-values
+A significance level is a probability threshold below which the null hypothesis can be rejected. You must choose the significance level before computing the test statistic. It is usually .01 or .05.
+A p-value is the smallest significance level at which the null hypothesis would be rejected. The confidence interval contains the values of the statistic for which we accept the null hypothesis.
+Correlations are useful as effects can help predict an outcome, but correlation does not imply causation.
+When making recommendations, one should take into consideration confounding variables and the fact that correlation across two variables do not imply that an increase or decrease in one of them will drive an increase or decrease of the other.
+Spurious correlations happen in data. They are just coincidences given a particular data sample.
+

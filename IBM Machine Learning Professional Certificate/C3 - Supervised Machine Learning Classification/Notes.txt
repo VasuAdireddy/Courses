@@ -1,0 +1,164 @@
+Week 1
+
+- Logistic regression models are used for classification
+- Categorical outcomes are predicted using classification method.
+
+Examples of models used for supervised learning: Classification
+- Logistic Regression
+- K-Nearest Neighbors
+- Support Vector Machines
+- Neural Networks
+- Decision Tree
+- Random Forests
+- Boosting
+- Ensemble Models
+- each of the above mentioned models are used for both regression and classification.
+
+Classification error metrics:
+from confusion matrix:
+- Accuracy = TP+TN / (TP+TN+FP+FN)
+- Recall (Sensitivity) = TP/(TP+FN)
+- Precision = TP / (TP+FP)
+- specificity = TN / (FP+TN)
+
+from sklearn.metrics
+-we can import metrics from above library
+
+Logistic regression is similar to a linear regression, except that it uses a logistic function to estimate probabilities of an observation belonging to a certain class or category.
+
+
+Summary/Review
+Classification Problems
+The two main types of supervised learning models are:
+Regression models, which predict a continuous outcome
+Classification models, which predict a categorical outcome.
+
+The most common models used in supervised learning are:
+Logistic Regression
+K-Nearest Neighbors
+Support Vector Machines
+Decision Tree
+Neural Networks
+Random Forests
+Boosting
+Ensemble Models
+With the exception of logistic regression, these models are commonly used for both regression and classification. Logistic regression is most common for dichotomous and nominal dependent variables.
+
+Logistic Regression
+Logistic regression is a type of regression that models the probability of a certain class occurring given other independent variables.It uses a logistic or logit function to model a dependent variable. It is a very common predictive model because of its high interpretability.
+Classification Error Metrics
+A confusion matrix tabulates true positives, false negatives, false positives and true negatives. Remember that the false positive rate is also known as a type I error. The false negatives are also known as a type II error.
+Accuracy is defined as the ratio of true postives and true negatives divided by the total number of observations. It is a measure related to predicting correctly positive and negative instances.
+Recall or sensitivity identifies the ratio of true positives divided by the total number of actual positives. It quantifies the percentage of positive instances correctly identified.
+Precision is the ratio of true positive divided by total of predicted positives. The closer this value is to 1.0, the better job this model does at identifying only positive instances.
+Specificity is the ratio of true negatives divided by the total number of actual negatives. The closer this value is to 1.0, the better job this model does at avoiding false alarms.
+The receiver operating characteristic (ROC) plots the true positive rate (sensitivity) of a model vs. its false positive rate (1-sensitivity).
+The area under the curve of a ROC plot is a very common method of selecting a classification methods.T
+he precision-recall curve measures the trade-off between precision and recall.
+The ROC curve generally works better for data with balanced classes, while the precision-recall curve generally works better for data with unbalanced classes.  
+
+__________________________________________________________________________________________
+
+Week - 2:
+
+K nearest neighbors
+K-nearest neighbors (KNN) is a non-parametric supervised learning algorithm that can be used for both classification and regression tasks. It works by finding the k most similar instances in the training set to a new instance, and then predicting the label of the new instance based on the labels of the k nearest neighbors.
+
+KNN for classification:
+lets say we have to predict a data point which is around lots of other known data points for churned or non churned
+- we need to select k points around our data point and see max points are churned or not,
+- for this to work successfully, we need to choose odd k value or else we will get a tie.
+
+what is needed to select a KNN model
+- correct value of 'K'
+- How to measure the closeness of neighbors?
+
+while making predictions for KNN, we can draw a line called decision boundary, it is a line that divides data based on different prediction values
+
+- KNN will not give us correct K, it is not a learned parameter, it is a hyper parameter we need to tune it to find the best k value.
+
+Distance measurement:
+- Euclidean distance (L2) = it is the hypotenues distance between 2 points, square root of opposite side distance squares
+- Manhattan Distance (L1) : sum of mod of opposite side distances
+
+Pros of KNN:
+- simple to implement
+- adapts well to new training data
+- easy to interpret
+
+Cons of KNN:
+- Slow to predict because many distance calculations
+- Can require lots of memmory if dataset is large
+- when there are many predictors, KNN accuracy can break down due to curse of dimentionality.
+
+- KNN is fast because, it involves only storing training data, no need of any cost function.
+- model has many parameters, it requires more memory
+- prediction involves finding closest neighbors
+
+#library
+from sklearn.neighbors import KNeighborsClassifier
+
+Summary:
+K Nearest Neighbor Methods for Classification
+K nearest neighbor methods are useful for classification. The elbow method is frequently used to identify a model with low K and low error rate.
+These methods are popular due to their easy computation and interpretability, although it might take time scoring new observations, it lacks estimators, and might not be suited for large data sets.  
+
+__________________________________________________________________________________________
+
+Week - 3:
+
+SVM: the algorithms attempts to find the optimal hyperplane or decision boundary that seperates the data points of different classes with the maximum margin.
+margin is the distance between boundary and closest data points of each class.
+- these margins on either side of decision boundry are called support vectors.
+
+#library
+from sklearn.svm import LinearSVM
+
+#creating instance
+LinSVC = LinearSVC(penalty = 'l2', C=10.0)
+
+in above if C is lower that means more regularization and simple model.
+
+- SVM are more sensitive to values that fall within our margin, but they will not be effected at all by those large values classified outside our margin.
+
+- SVM uses decision boundaries for classification
+- SVM models are both linear and non linear
+- The algorithm behind SVM calculates hyperplanes that minimize misclassification error.
+
+
+- SVM can be used for non linear classifiers using the kernal method/functions.
+- we can create non linear decision boundaries using kernal trics/methods
+- here it uses gaussian kernels
+
+#library
+from sklearn.svm import SVC
+#creating instance
+rbfSVC = SVC(kernel = 'rbf', gamma=1.0, C=10.0)
+
+- svc helps in identifying suitable kernel.
+- rbf : radial basis function
+- gamma above, will control the gaussian distribution reach, higher the gamma value lesser the regularization.
+
+Radial Basis Function (RBF) is a popular kernel function used in machine learning, particularly in Support Vector Machines (SVMs) and other kernel-based methods. It is also known as the Gaussian kernel.
+The RBF kernel measures the similarity or distance between two data points in a high-dimensional feature space. It is defined as the exponential of the squared Euclidean distance between the data points, scaled by a parameter known as the bandwidth or gamma (γ). The formula for the RBF kernel is as follows:
+K(x, y) = exp(-γ * ||x - y||^2)
+
+- SVMs with RBF kernels are very slow to train with lots of data
+- we can contrust kernel map with SGD using Nystroem or RBF sampler, this map our original dataset into higher dimensions, this is called kernel approximation
+- after that we can then fit a linear classifier
+
+Model choice:
+features:-		data:-			model:-
+many(~10k features)	small(~1k rows)		Simple, Logistic or LinearSVC
+few(<100 features)	medium(~10k rows)	SVC with RBF
+few(<100)		large(>100k)		add features, LinearSVC or kernel approximation
+
+
+#library
+from sklearn.kernel_approximation import Nystroem
+#create instance
+NystroemSVC = Nystroem(kernel='rbf', gamma=1.0,n_components=100)
+#fit the instance to data and transform
+X_train = NystroemSVC.fit_transform(X_train)
+X_test = NystroemSVC.transform(X_test)
+

@@ -1,0 +1,400 @@
+WEEK - 1
+
+ML is the process through which computers are said to learn and infer predictions from data.
+
+Model is a learning Algorithm, A good model omit unimportant details and retain whats important.
+
+ML in daily lives:
+SPam detection, Web search, Movie recommendations, speech recognition, fraud detection, Vehicle driver assistance, etc.
+
+fit parameters vs hyper parameters
+
+supervised ML is a type involves training a model on labeled dataset inorder to make predictions on new unseen data
+
+Two main modelling approaches:
+-Regression : outcome value is numeric
+-Classification : outcome value is categorical
+
+y=f(x,omega)
+yp-> predicted output
+x-> input
+omega -> hyper parameters
+
+we can find best omega by trying with different values of hyper parameters and different data predicting new output.
+
+J(y,yp) -> loss function
+update rule : using features x and outcome y, 
+update parameters omega to minimize loss function J
+
+Interpretation vs Prediction
+Interpretation: we focus our model with primary objecvtive is to find insights about our data. like finding relationships 
+Interpretation approach uses parameters omega to give us insights into a system.
+
+Prediction:
+primary object is to make best predictions
+reduce loss, find close yp to actual values y
+
+Feature importance is considered while making a model, it defines which features are more important in prediction best values, it generally defines this features by calculations which feature effects the actual values more
+
+interpretation can provide insight into improvements in prediction, and vice-versa.
+
+Regression : 
+outcome is continuous
+
+Classification :
+outcome is categorical
+requirements of classification:
+- features that can be quantified
+- labels that are known
+- method to measure similarity
+
+SL overview:
+data with outcomes + model --->(fit)   fitted_model
+data without outcomes + fitted_model ---->(predict)  predicted outcomes
+
+
+Linear Regression:
+
+errors :
+SSE : sum squared error : SSE is the sum of the squared differences between the actual values and the predicted values
+TSE : Total sum of squares : TSE is the sum of the squared differences between the actual values and the mean value of the dependent variable.
+R^2 : 1 - (SSE/TSS)
+R^2 ranges from 0-1, higher value of this represents better fit between data and model
+
+
+Summary/Review
+Introduction to Supervised Machine Learning  
+The types of supervised Machine Learning are:
+Regression, in which the target variable is continuous
+Classification, in which the target variable is categorical
+To build a classification model you need:
+Features that can be quantified
+A labeled target or outcome variable
+Method to measure similarity 
+
+Linear Regression  
+A linear regression models the relationship between a continuous variable and one or more scaled variables.It is usually represented as a dependent function equal to the sum of a coefficient plus scaling factors times the independent variables. 
+Residuals are defined as the difference between an actual value and a predicted value. 
+A modeling best practice for linear regression is:
+Use cost function to fit the linear regression model
+Develop multiple models
+Compare the results and choose the one that fits your data and whether you are using your model for prediction or interpretation. 
+Three common measures of error for linear regressions are:
+Sum of squared Error (SSE)
+Total Sum of Squares (TSS)
+Coefficient of Determination (R2)
+
+Linear Regression Syntax  
+The most simple syntax to train a linear regression using scikit learn is:
+from sklearn.linear_model import LinearRegression
+LR = LinearRegression()
+LR = LR.fit(X_train, y_train) 
+To score a data frame X_test you would use this syntax:
+y_predict = LR.predict(X_test)  
+
+__________________________________________________________________________________________
+
+WEEK - 2
+
+Overfitting occurs when a model is trained too well on the training data, to the point that it starts to memorize the training examples instead of learning the underlying patterns. As a result, the model performs well on the training data, but poorly on the unseen test data.
+
+Underfitting occurs when a model is not complex enough to capture the underlying patterns in the training data, leading to poor performance on both the training and test data.
+
+labeled data means, data with answer i.e data we use to train a model which have answer
+unlabeled data is like test data, where we remove answer and predict the answer
+
+the errors on the test data are much higher, this is because the one-hot encoded model is overfitting the data. 
+
+the more parameters we use, the more likely we are to overfit our data
+
+train_test_split
+
+Adjusting the standard linear approach to regression by adding polynomial features in one of many approaches to dealing with the fundaental problems:
+prediction
+interpretation
+
+you can use a linear model to fit nonlinear data. A simple way to do this is to add powers of each feature as new features, then train a linear model on this extended set of features. This technique is called Polynomial Regression.
+
+polynomial features are used to capture nonlinear effects
+polynomial features:
+from sklearn.preprocessing import PolynomialFeatures
+polyFeat = PolynomialFeatures(degree=2)
+polyFeat = polyFeat.fit(X_data)
+X_poly = polyFeat.transform(X_data)
+
+Overfitting is simple to deal with, using methods like regularization
+
+To deal with underfitting, we can build a more complex model using methods like polynomial regression.
+
+evaluation metrics:
+Regression : MSE, R^2, MAE
+Classification : accuracy, precision, recall, F1-score, AUC-ROC
+
+negative R^2 is a sign of overfitting
+
+we  use GridSearch to find the best hyper-parameters of the model by using cross-validation method of the parameter grid.
+
+Summary/Review
+Training and Test Splits  
+Splitting your data into a training and a test set can help you choose a model that has better chances at generalizing and is not overfitted.
+The training data is used to fit the model, while the test data is used to measure error and performance. 
+Training error tends to decrease with a more complex model. 
+
+Polynomial Regression  
+Polynomial terms help you capture nonlinear effects of your features. 
+Other algorithms that help you extend your linear models are:
+Logistic Regression
+K-Nearest Neighbors
+Decision Trees
+Support Vector Machines
+Random Forests
+Ensemble Methods
+Deep Learning Approaches
+
+__________________________________________________________________________________________
+
+WEEK - 3
+
+There is a trade-off between the size of your training set and your testing set. If you use most of your data for training, you will have fewer samples to validate your model. Conversely, if you use more samples for testing, you will have fewer samples to train your model. Cross Validation will allow you to reuse your data to use more samples for training and testing.
+
+Cross Validation:
+we split so that there will be no overlap between test split
+like we divide data into 4 parts, each time one part will act as test split and remaining will act as train split.
+we take average of all the eroors in these 4 errors we get.
+
+model complexity is inversly proportional to errors, if we increase the model complexity gradually we will reduce errors and we may get more accuracy. this is not gauranteed
+
+Hyperparameter tuning involves using cross validation (or train-test split) to determine which hyperparameters are most likely to generate a model that generalizes well outside of your sample.
+
+LASSO regression
+Ridge regression
+Both Lasso and Ridge with proper hyperparameter tuning give better results than plain ol' Linear Regression!
+
+A higher R^2 score indicates that the model is better at making accurate predictions, as it is able to explain more of the variance in the target variable.
+
+The smaller the RMSE number the better our model is
+
+
+Summary/Review
+
+Cross Validation
+The three most common cross validation approaches are:
+k-fold cross validation
+leave one out cross validation
+stratified cross validation
+
+Cross validation method involves dividing the dataset into 3 parts:
+training set - is a portion of the data used for training the model
+validation set - is a portion of the data used to optimize the hyper-parameters of the model
+test set - is a portion of the data used to evaluate the model 
+
+Cross Validation Syntax
+`Scikit Learn` library contains many methods that can perform the splitting of the data into training, testing and validation sets. The most popular methods that we covered in this module are:
+*   train_test_split - creates a single split into train and test sets
+*   K-fold - creates number of k-fold splits, allowing cross validation
+*   cross_val_score - evaluates model's score through cross validation
+*   cross_val_predict – produces the out-of-bag prediction for each row
+*   GridSearchCV – scans over parameters to select the best hyperparameter set with the best out-of-sample score
+
+__________________________________________________________________________________________
+
+WEEK - 4
+
+Bias refers to the difference between the predicted values of the model and the true values of the data.
+A model with high bias is usually too simple and makes strong assumptions about the data, resulting in underfitting
+Variance, on the other hand, refers to the sensitivity of the model to the noise or randomness in the data.
+A model with high variance is usually too complex and captures the noise or randomness in the data, resulting in overfitting.
+
+Ideally a model should have low variance and low bias, it is proven to be best fit.
+
+
+analyzing complexity(x) and error(y) graph:
+- if we increase the complexity, the training error will be less, but test error will be large (over fit)
+- if we reduce the complexity, both best and training error will be large (underfit)
+- at some instances between high complexity and low complexity, we can find optimal complexity where test and train errors are small, that is our best choice or case.
+
+increasing polynomial degree can increase the complexity of model, so it can fit to training data
+increasing polynomial degree to higher powers will also lead to overfitting on training and poor on test/prediction.(lower bias, higher variance)
+we need to find optimal polynomial degree, which does good on both training and test.
+
+3 Sources of model error--
+being wrong : reason is due to high bias
+being unstable : reason is due to high variance
+unavoidable randomness : irreducible error, reason is due to randomness in data.
+
+example:
+polynomial degree = 1 --> high bias, low variance
+polynomial degree = 4 --> best fit
+polynomial degree = 15 ---> low bias, high variance
+
+
+Regularization and model selection:
+regularization helps us to choose best fit, which helps in choosing best bias and variance.
+- we modify the cost function to accomplish regularizations
+- adjusted cost function : M(w) + lambda*R(w)
+M(w) -> orizial cost function
+lambda -> regularization parameter
+R(w) -> function of estimated parameters
+
+regularization adds an adjustable strength parameters directly into the cost function.
+lambda helps us to manage complexity trade off.
+- more lambda introduces a simpler model or more bias.
+- less lambda makes the model more complex and increase variance
+
+Regularization performs feature selection by shrinking the contribution of features.
+in lasso regression, this is accomplished by making the coefficients of those features to zero, so it is not contributed in model.
+other process is simply removing features.
+
+reducing number of features can prevent overfitting
+for few models it will increase fitting time, quicker results
+but we should make sure, the features we remove are not contributing to our outcome
+
+
+Ridge Regression:
+
+the complexity penalty lambda is applied proportionally to squared coeffecient values.
+the penalty term has the effect of shrinking coefficients towards 0.
+large coefficients are strongly penalized because of squaring.
+as we know polynomial degeree introduces complexity, increasing it will lead to best fit, more increase will overfit
+here in ridge, we use lambda to go from underfit -> better fit-> overfit.
+if lambda is too small, it may lead to overfit, it it is large it will lead to underfit, we need to find optimal lambda.
+Optimal lamda is choosen using cross validation.
+A smaller value of lamda means less shrinkage to the regression coefficients, means less regularization.
+As lamda increases the standardized coefficients decrease.
+
+
+LASSO Regression:
+Least absolute shrinkage and selection operator.
+the only difference between ridge and lasso is how we penalize the cost function using coefficients
+with ridge(L2) : we use coefficient squares : (lambda)*|Bj^2|
+with Lasso(L1) : we use absolute value of each coefficients : (lambda)*|Bj|
+In LASSO the complexity penalty (lambda) is directly proportional to the absolute value of coefficients.
+increase in lambda will raise bias but lowe varience
+LASSO will more likely perform feature selection, it can shrink the coefficients to zero.
+LASSO is slower to converge than ridge.
+lambda value and better fit relation is same as ridge, as lambda decreases more model will overfit.
+in both LASSO and Ridge, complexity tradeoff  is: reduce variance without increasing bias too much to find better fit.
+
+differences between LASSO and Ridge:
+Penalty function: Lasso Regression uses the L1-norm penalty (sum of the absolute values of the coefficients), while Ridge Regression uses the L2-norm penalty (sum of the squares of the coefficients).
+Effect on coefficients: Lasso Regression can set some of the coefficients to exactly zero, effectively removing some of the features from the model. This makes Lasso Regression useful when there are many irrelevant or redundant features in the dataset. 
+Model interpretation: Lasso Regression can produce models that are easier to interpret, as it can remove irrelevant or redundant features, and only keep the most important features.
+Performance: Lasso Regression tends to perform better than Ridge Regression when the number of features is relatively small and there is a strong signal in the data. Ridge Regression tends to perform better than Lasso Regression when the number of features is large and the signal in the data is weak.
+
+
+Elastic Net (Hybrid Approach):
+if our goal is prediction accuracy, we can figure out which model and which hyperparameters are best fit using cross validation.
+If our goal is interpretability, LASSO has a bonus to eliminate features.
+Elastic net, it is a hybrid approach between ridge and LASSO
+This approach introduces a new parameter aplha that determines a weighted average of L1 and L2 penalities.
+means it determines how much L1 norm will be used and how much L2 norm is used
+(lambda) * summation (alpha*Bj^2 + (1-alpha)*|Bj|)
+Elastic Net is a mixture of LASSO and Ridge
+
+
+Recursive Feature Elimination (RFE)
+it is an approach that contains:
+- a model or estimation approach is selected
+- we a desired number of features to be present.
+RFE then repeatedly applies the model and remove less important features
+-from sklearn.model_selection import RFE
+-rfeMod = RFE(est,n_features_to_select=5)
+est -> an instance of a model to use
+5 -> final number of features to be present
+-rfeMod = rfeMod.fit(X_train,y_train)
+-y_pre = rfeMod.pred(X_test)
+
+another class RFECV will also perform feature elimination using cross validation
+
+
+We have RidgeCV, LassoCV and ElasticNetCV functions in sklearn.linear_model, so we can test these algorithms with multiple alpha values at once and choose the best one.
+
+
+Regularization zeroes out or gets model’s coefficients closer to zero and, in such a way, it avoids the data being overfitted.
+A model with high variance is characterized by sensitivity to small changes in input data. 
+
+
+Summary/Review
+
+Bias-variance tradeoff decomposes the model's Mean Square Error into two parts: Bias and Variance.
+
+Bias- is a measure of how near the model is to the actual function we are trying to model. If your model has a high bias, the model is underfitting; this means you will do poorly on the training and test data, but the relative results will be similar. 
+
+Ways to improve bias include making the model more complex, adding higher order polynomials, obtaining more features or finding more data.
+
+Variance - is the average squared difference of each model you train relative to the average prediction of each model. If your model has high variance, the model will usually overfit the data; this means you will do well on the training data but not on the testing data. 
+
+You can improve variance by making the model less complex, i.e., lowering the order of the polynomial, obtaining more data  or using Reguliztion. There are 3 regulazation techniques discussed in this Module: Ridge, LASSO, and Elastic Net.
+
+- Ridge (L2 Regularization)
+penalizes the size  magnitude of the regression coefficients by adding a squad term 
+enforces the coefficients to be lower, but not 0
+minimizes irrelevant features and does not remove them  
+faster to train 
+
+- LASSO (L1 Regularization)
+penalizes the  absolute value of the coefficients
+sets irrelevant features to 0
+finds features you don't need 
+
+- Elastic Net (L1+L2 Regularization)
+penalizes the size  magnitude of the regression and  absolute value of the coefficients
+sets irrelevant features to 0 and enforces the coefficients to be lower
+
+
+Points:
+Higher model complexity leads to a higher chance of overfitting. 
+Underfitting is characterized by higher errors in both training and test samples.
+Regularization decreases the likelihood of overfitting relative to training data.
+The larger a feature’s scale, the more likely its estimated impact will be influenced by regularization.
+Ridge regression is fastest under the hood, due to squared parameters.
+Elastic Net combines L1 and L2 regularization.
+BOTH Ridge regression and Lasso regression Add a term to the loss function proportional to a regularization parameter.
+Compared with Lasso regression (assuming similar implementation), Ridge regression is Less likely to set feature coefficients to zero.
+LassoCV use L1 regularization function, RidgeCV uses L2 regularization function.
+
+__________________________________________________________________________________________
+
+WEEK - 5
+
+Regularization reduces complexity by penalizing it in cost function
+Regularization , increases bias but reduce variance
+goal of regularization is to find out best bias-variance trade off
+As alpha gets larger MSE decreases, it alpha gets too large MSE increases, in both LASSO and Ridge.
+As alpha increases R^2 score increases, if alpha increases too large R^2 score decreases and falls to 0, in both LASSO and Ridge.
+
+In Analytic View, increasing L2/L1 penalties force coefficients to be smaller, restricting their plausible range.
+Under the Geometric formulation, the cost function minimum is found at the intersection of the penalty boundtry and a contour of the traditional OLS cost function surface.
+Under the Probabilistic formulation, L2 (Ridge) regularization imposes Gaussian prior on the coefficients, while L1 (Lasso) regularization imposes Laplacian prior.
+
+
+Summary/Review
+
+Regularization Techniques
+Three sources of error for your model are: bias, variance, and, irreducible error.
+Regularization is a way to achieve building simple models with relatively low error. It helps you avoid overfitting by penalizing high-valued coefficients. It reduces parameters and shrinks the model.
+Regularization adds an adjustable regularization strength parameter directly into the cost function.
+Regularization performs feature selection by shrinking the contribution of features, which can prevent overfitting.
+
+In Ridge Regression, the complexity penalty λ is applied proportionally to squared coefficient values.
+–  The penalty term has the effect of “shrinking” coefficients toward 0.
+–  This imposes bias on the model, but also reduces variance.
+–  We can select the best regularization strength lambda via cross-validation.
+–  It’s a best practice to scale features (i.e. using StandardScaler) so penalties aren’t impacted by variable scale.
+
+In LASSO regression: the complexity penalty λ (lambda) is proportional to the absolute value of coefficients. LASSO stands for : Least Absolute Shrinkage and Selection Operator.
+–  Similar effect to Ridge in terms of complexity tradeoff: increasing lambda raises bias but lowers variance.
+–  LASSO is more likely than Ridge to perform feature selection, in that for a fixed λ, LASSO is more likely to result in coefficients being set to zero.
+
+Elastic Net combines penalties from both Ridge and LASSO regression. It requires tuning of an additional parameter that determines emphasis  of L1 vs. L2 regularization penalties.
+LASSO’s feature selection property yields an interpretability advantage, but may underperform if the target truly depends on many of the features.
+Elastic Net, an alternative hybrid approach, introduces a new parameter α (alpha) that determines a weighted average of L1 and L2 penalties.
+Regularization techniques have an analytical, a geometric, and a probabilistic interpretation.  
+
+
+Points:
+When working with regularization, what is the view that illuminates the actual optimization problem and shows why LASSO generally zeros out coefficients? Ans: Geometrical View
+When working with regularization, what is the view that recalibrates our understanding of LASSO and a Ridge, as a base problem, where coefficients have particular prior distributions? Ans: Probabilistic View
+When working with regularization, what is the logical view of how to achieve the goal of reducing complexity? Ans: Analytical View
+When working with regularization and using the geometric formulation, what is found at the intersection of the penalty boundary and a contour of the traditional OLS cost function surface? ANs: The cost function minimum
+In Regularization technique, Higher lambda decreases variance, means smaller coefficients.
