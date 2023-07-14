@@ -153,6 +153,10 @@ many(~10k features)	small(~1k rows)		Simple, Logistic or LinearSVC
 few(<100 features)	medium(~10k rows)	SVC with RBF
 few(<100)		large(>100k)		add features, LinearSVC or kernel approximation
 
+- different kernels:
+rbf: Gaussian Radial Basis Function (RBF)
+poly: Polynomial Kernel
+sigmoid: Sigmoid Kernel
 
 #library
 from sklearn.kernel_approximation import Nystroem
@@ -161,4 +165,13 @@ NystroemSVC = Nystroem(kernel='rbf', gamma=1.0,n_components=100)
 #fit the instance to data and transform
 X_train = NystroemSVC.fit_transform(X_train)
 X_test = NystroemSVC.transform(X_test)
+
+
+Summary/Review
+
+-The main idea behind support vector machines is to find a hyperplane that separates classes by determining decision boundaries that maximize the distance between classes.
+-When comparing logistic regression and SVMs, one of the main differences is that the cost function for logistic regression has a cost function that decreases to zero, but rarely reaches zero. SVMs use the Hinge Loss function as a cost function to penalize misclassification. This tends to lead to better accuracy at the cost of having less sensitivity on the predicted probabilities.
+-Regularization can help SVMs generalize better with future data.
+-By using gaussian kernels, you transform your data space vectors into a different coordinate system, and may have better chances of finding a hyperplane that classifies well your data.SVMs with RBFs Kernels are slow to train with data sets that are large or have many features.  
+
 
