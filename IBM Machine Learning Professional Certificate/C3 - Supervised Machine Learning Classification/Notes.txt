@@ -174,4 +174,214 @@ Summary/Review
 -Regularization can help SVMs generalize better with future data.
 -By using gaussian kernels, you transform your data space vectors into a different coordinate system, and may have better chances of finding a hyperplane that classifies well your data.SVMs with RBFs Kernels are slow to train with data sets that are large or have many features.  
 
+__________________________________________________________________________________________
+
+Week - 4:
+
+overview of other classifiers discussed so far:
+for K-Nearest Neighbors,
+- training data is the model
+- Fitting is fast, it is just storing data
+- Prediction can be slow, lots of distances to measure
+- Decision boundary is flexible.
+
+for Logistic regression,
+- model is just learning parameters
+- fitting can be slow, coz it must find best parameters
+- prediction is fast
+- Decision boundary is simple, linear and less flexible
+
+Decision Trees:
+This splits the data and arrange it as tree, so that it will have a specific branch for every possible variation in input data.
+- max depth is inversly proportional to overfitting, if there is more depth, then more variation with most likely overfit to training data.
+- we should split the tree only until the leaves are pure. if we do more splitting it will be overfit or becomes bad
+- leaves are pure, means when a leaf node has only one class remaining.
+- stop splitting when we reached maximum depth, or we can prune the tree if we reached max depth(pruning means cutting of some leaves)
+- we can keep splitting until a predefined performance metric is achieved.
+
+- classification error, Cross entropy and Gini index are used  to evaluate the performance of classification algorithms and to guide the construction of decision trees.
+- in practicle gini index is often used for splitting
+
+cons:
+- decision trees tend to over fit
+- small changed in data greatly affect prediction, i.e high variance
+- solution: prune tress
+
+- we decide which leaves to prune based on classification error threshold
+
+#syntax
+from sklearn.tree import DecisionTreeClassifier
+#create instance
+DTC = DecisionTreeClassifwier(criterion = 'Gini',max_features=10,max_depth=5)
+DTC = DTCfit(X_train, y_train)
+y_pred = DTC.predict(X_test)
+
+- Decision trees are non linear
+- Decision trees considered a greedy algorithm.
+
+
+Summary/Review
+-Decision trees split your data using impurity measures. They are a greedy algorithm and are not based on statistical assumptions.
+-The most common splitting impurity measures are Entropy and Gini index.Decision trees tend to overfit and to be very sensitive to different data.
+-Cross validation and pruning sometimes help with some of this.
+-Great advantages of decision trees are that they are really easy to interpret and require no data preprocessing.  
+- split for each node of a decision tree is determined by the split that minimizes the gini impurity.
+- decreasing the maximum depth is a way to regularize a decision tree to address overfitting.
+
+__________________________________________________________________________________________
+
+Week - 5:
+
+-Ensemble models are a very popular technique as they can assist your models be more resistant to outliers and have better chances at generalizing with future data.
+-Recently, stochastic gradient boosting became a go-to candidate model for many data scientists.
+
+-Ensemble models, also known as ensemble learning or model averaging, are machine learning techniques that combine the predictions of multiple individual models to improve overall performance and accuracy.
+
+- Bagging: Dootstrap aggregation,involves training multiple models on different subsets of the training data. Each model is trained independently, often using the same learning algorithm, and the final prediction is obtained by aggregating the predictions of all models.
+eg: Random Forest.
+- bagging also uses multiple trees 
+- the bigger the no of trees the less overfit out bagging algo will be.
+- in practical, around 50 trees is enough for better performance of our bagging algo.
+- using bagging, we can grow trees in parallel.
+
+#syntax
+from sklearn.ensemble import BaggingClassifier
+BC = BaggingClassifier(n_estimators=50)
+
+-above n_estimators is no of trees
+
+- A model that averages the predictions of multiple models reduces the variance of a single model and has high chance to generaliza well when scoring new data
+
+- for n independent trees, each with variance of sigma^2, then the bagged variance is: sigma^2 / n
+- all these trees are highly correlated, so its a problem
+- we need to de-correlate trees to make then different from another.
+- this can be done by using random subsets of data for each tree.
+- the above mentioned method is called random forest
+
+#syntax
+from sklearn.ensemble import RandomForestClassifier
+RC=RandomFOrestClassifier(n_estimators=50)
+
+- some times these random forest also do not reduce the variance enough, in such cases we introduce more randomness.
+- this can be done using Extra random trees
+
+#syntax
+from sklearn.ensemble import ExtraTreesClassifier
+EX = ExtraTreesClassifier(n_estimators=50)
+
+Boosting:
+The main idea behind boosting is to sequentially train the weak learners in such a way that each subsequent model focuses more on the misclassified samples by the previous models. This iterative process of training and reweighting the data helps improve the overall accuracy of the ensemble.
+
+types of boosting models: Gradient boosting, Ada Boosting
+
+Bagging VS Boosting:
+- Bootstarpped sample				-fit entire data
+- Base trees created independently		- Base trees created successively
+- only data points considered			- use residuals from previous models
+- no weighting used				- up weight misclassified points
+- Extra trees will not overfit			- extra trees will overfit
+
+#syntax
+from sklearn.ensemble import GradientBoostingClassifier
+GBC = GradientBoostingClassifier(learning_rate = 0.1, max_features=1, subsample = 0.5, n_estimators=200)
+
+#syntax
+from sklearn.ensemble import AdaBoostCLassifier
+from sklearn.ensemble import DecisionTreeClassifier
+
+ABC = AdaBoostClassifier(base_estimator = DecisionTreeClassifier(), learning_rate=0.1, n_estimators=200)
+
+Stacking:
+Unlike traditional ensembles like bagging or boosting, which combine predictions from multiple models in a parallel or sequential manner, stacking involves training a meta-model that learns how to combine the predictions of multiple base models.
+
+#syntax
+from sklearn.ensemble import VotingClassifier
+VC= VotingClassifier(estimator_list)
+
+-in above code estimator_list is the list of previously fitted models
+
+
+Summary/Review
+-Ensemble Based Methods and Bagging
+Tree ensembles have been found to generalize well when scoring new data. Some useful and popular tree ensembles are bagging, boosting, and random forests. Bagging, which combines decision trees by using bootstrap aggregated samples. An advantage specific to bagging is that this method can be multithreaded or computed in parallel. Most of these ensembles are assessed using out-of-bag error.
+
+-Random Forest
+Random forest is a tree ensemble that has a similar approach to bagging. Their main characteristic is that they add randomness by only using a subset of features to train each split of the trees it trains. Extra Random Trees is an implementation that adds randomness by creating splits at random, instead of using a greedy search to find split variables and split points.
+
+-Boosting
+Boosting methods are additive in the sense that they sequentially retrain decision trees using the observations with the highest residuals on the previous tree. To do so, observations with a high residual are assigned a higher weight.
+
+-Gradient Boosting
+The main loss functions for boosting algorithms are:
+
+0-1 loss function, which ignores observations that were correctly classified. The shape of this loss function makes it difficult to optimize.
+
+Adaptive boosting loss function, which has an exponential nature. The shape of this function is more sensitive to outliers.
+
+Gradient boosting loss function. The most common gradient boosting implementation uses a binomial log-likelihood loss function called deviance. It tends to be more robust to outliers than AdaBoost.
+
+The additive nature of gradient boosting makes it prone to overfitting. This can be addressed using cross validation or fine tuning the number of boosting iterations. Other hyperparameters to fine tune are:
+
+learning rate (shrinkage)
+
+subsample
+
+number of features.
+
+-Stacking
+Stacking is an ensemble method that combines any type of model by combining the predicted probabilities of classes. In that sense, it is a generalized case of bagging. The two most common ways to combine the predicted probabilities in stacking are: using a majority vote or using weights for each predicted probability.  
+
+__________________________________________________________________________________________
+
+Week - 6:
+
+Model Interpretability:
+Model interpretability refers to the ability to understand and explain the behavior and decision-making process of a machine learning model. It is important because it provides insights into how the model works, what features it relies on for predictions, and why it makes certain decisions. Interpretability is particularly crucial in domains where transparency, fairness, and accountability are important, such as healthcare, finance, and autonomous systems
+
+- ML models are chategorized into 2 types based on interpretability
+- self interpretable: these are refered to those models with simple structures, which can be easily comprehended by humans without extra explanation methods.
+These are usually prefered in high risk areas like finance and health.
+- Non self interpretable models: these are model with complex structures, can be defined as black box model.
+These are used in areas where we need good performance like NLP, Image recognition and traffic patters.
+
+- we can only trust and effectively debug models if they are understandable.
+
+Examples:
+-Self Interpretable:
+Linear models(Note: more features in Linear models can make it difficult to undestand i.e becomes non self interpretable)
+Tree Models (such as decision trees, however big tree models with large depths and long widths also difficult to understand)
+KNN (Note: if the feature space is kept small, then it is self interpretable)
+
+-Non Self Interpretable:
+Ensemble models (there are lots of trees and each tree has its own prediction and , final decision is average of all those. these are so complex to understand)
+
+Model interpretation methods:
+- Intrinsic: these are mainly applied to self interpretable models like Linear models, Tree models and KNN, although these are simple they can become complex with more features
+the goal of intrinsic methods is to simplify the model using methods like regularization or pruning
+- post-hoc: these are used for non self interpretable models, such as random forests, non linear SVM and Deep nueral networks.
+
+
+Model-agnostic explanations:
+Model-agnostic explanations are interpretability techniques that can be applied to any machine learning model, regardless of its type or complexity. These methods aim to provide insights into the decision-making process of the model without requiring detailed knowledge of its internal structure
+- these explanations are used to explain different types of ML models no matter the complexity, and produce modle explanations that have the same formats and presentations.
+
+Feature Importance:
+- this will help in reducing complexity of model by reducing features, thus reducing overfitting.
+- this also helps in interpresting how predictions are made by analyzing most important features
+Algorithms to measure feature importance:
+Permutation feature importance
+Impurity-based feature importance
+Shapley additive explanations (SHAP)
+
+- feature importance methods are also a model-agnostic explanation methods
+
+
+Surrogate Models:
+- lets say you have a complex model(black-box model) trained on dataset, i.e non self interpretable. You only know inputs and outputs of that mode, you dont know how theya re mapped
+- then you use some high self interpretable models and pass the inputs and outputs to understand the mapping, these models are called surrogate models.
+
+If a surrogate model is built to approximate the black-box model on a dataset, then it is called a global surrogate model. Because it tries to approximate the black box model globally on every instance in the dataset.
+
+LIME - local Interpretable Model agnostic explanations is a popular methos to build a surrogate model.
+
 
